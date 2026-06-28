@@ -22,16 +22,6 @@ export function ContactPage() {
   return (
     <main style={{ backgroundColor: '#fdf8f3', color: '#1a0a00' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Back Button */}
-        <button
-          onClick={() => setCurrentPage('home')}
-          className="flex items-center gap-2 transition-colors mb-8"
-          style={{ color: '#c8922a' }}
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span className="font-semibold">Quay lại Trang chủ</span>
-        </button>
-
         {/* Header */}
         <div className="mb-16">
           <h1 style={{ fontFamily: "'Merriweather', serif", color: '#8b1a1a' }} className="text-5xl md:text-6xl font-bold mb-6">

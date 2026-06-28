@@ -3,12 +3,19 @@
 import { useAppContext } from '@/app/context'
 import { categories, products } from '@/lib/products'
 import { Filter } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ProductCard } from './ProductCard'
 
 export function ShopPage() {
   const { categoryFilter, setCategoryFilter, sortBy, setSortBy } = useAppContext()
   const [showFilters, setShowFilters] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    const timer = setTimeout(() => setLoading(false), 300)
+    return () => clearTimeout(timer)
+  }, [categoryFilter, sortBy])
 
   let filteredProducts = products
   if (categoryFilter) {
@@ -105,7 +112,13 @@ export function ShopPage() {
 
           {/* Lưới sản phẩm */}
           <div className="flex-1">
-            {filteredProducts.length > 0 ? (
+            {loading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="rounded-lg h-96 animate-pulse" style={{ backgroundColor: '#e8d5b0' }} />
+                ))}
+              </div>
+            ) : filteredProducts.length > 0 ? (
               <>
                 <p className="font-sans text-sm mb-5" style={{ color: '#8a6a40' }}>
                   Hiển thị <strong>{filteredProducts.length}</strong> sản phẩm

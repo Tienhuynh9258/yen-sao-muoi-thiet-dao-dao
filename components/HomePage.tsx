@@ -109,7 +109,7 @@ export function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="flex justify-center mt-10">
             <button
               onClick={() => setCurrentPage('shop')}
               className="inline-flex items-center gap-2 border-2 font-serif font-bold py-3 px-8 rounded-lg transition-all hover:text-white"
