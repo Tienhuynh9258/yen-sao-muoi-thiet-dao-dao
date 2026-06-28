@@ -4,10 +4,14 @@ import { useAppContext } from '@/app/context'
 import { products } from '@/lib/products'
 import { ArrowRight, Award, Leaf, Sparkles } from 'lucide-react'
 import Image from 'next/image'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { ProductCard } from './ProductCard'
 
 export function HomePage() {
   const { setCurrentPage } = useAppContext()
+  const { ref: valueRef, isVisible: valueVisible } = useIntersectionObserver()
+  const { ref: productsRef, isVisible: productsVisible } = useIntersectionObserver()
+  const { ref: categoryRef, isVisible: categoryVisible } = useIntersectionObserver()
 
   const featuredProducts = products.slice(0, 4)
 
@@ -31,7 +35,7 @@ export function HomePage() {
             <p className="font-sans text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: '#c8922a' }}>
               Thương Hiệu Yến Sào Uy Tín
             </p>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance">
+            <h1 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance">
               Yến Sào Mười Thiết<br />
               <span style={{ color: '#f0c060' }}>Đào Đào</span>
             </h1>
@@ -51,7 +55,14 @@ export function HomePage() {
       </section>
 
       {/* Value Propositions */}
-      <section className="py-14 px-4 sm:px-6 lg:px-8 bg-white">
+      <section 
+        ref={valueRef}
+        className="py-14 px-4 sm:px-6 lg:px-8 bg-white"
+        style={{
+          animation: valueVisible ? 'fadeInUp 0.6s ease-out' : 'none',
+          opacity: valueVisible ? 1 : 0
+        }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -78,7 +89,7 @@ export function HomePage() {
                 >
                   <item.icon className="w-8 h-8" style={{ color: '#c8922a' }} />
                 </div>
-                <h3 className="font-serif font-bold text-lg mb-2" style={{ color: '#1a0a00' }}>
+                <h3 className="font-sans font-bold text-lg mb-2" style={{ color: '#1a0a00' }}>
                   {item.title}
                 </h3>
                 <p className="font-sans text-sm leading-relaxed" style={{ color: '#8a6a40' }}>
@@ -91,13 +102,21 @@ export function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-14 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#fdf8f3' }}>
+      <section 
+        ref={productsRef}
+        className="py-14 px-4 sm:px-6 lg:px-8"
+        style={{
+          backgroundColor: '#fdf8f3',
+          animation: productsVisible ? 'fadeInUp 0.6s ease-out' : 'none',
+          opacity: productsVisible ? 1 : 0
+        }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <p className="font-sans text-sm font-semibold tracking-widest uppercase mb-2" style={{ color: '#c8922a' }}>
               Bán Chạy Nhất
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1a0a00' }}>
+            <h2 className="font-sans text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1a0a00' }}>
               Sản Phẩm Nổi Bật
             </h2>
             <div className="w-16 h-1 mx-auto rounded" style={{ backgroundColor: '#c8922a' }} />
@@ -109,10 +128,10 @@ export function HomePage() {
             ))}
           </div>
 
-          <div className="flex justify-center mt-10">
+          <div className="w-full flex justify-center mt-10">
             <button
               onClick={() => setCurrentPage('shop')}
-              className="inline-flex items-center gap-2 border-2 font-serif font-bold py-3 px-8 rounded-lg transition-all hover:text-white"
+              className="inline-flex items-center gap-2 border-2 font-sans font-bold py-3 px-8 rounded-lg transition-all hover:text-white"
               style={{ borderColor: '#8b1a1a', color: '#8b1a1a' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#8b1a1a'
@@ -131,7 +150,14 @@ export function HomePage() {
       </section>
 
       {/* Danh mục */}
-      <section className="py-14 px-4 sm:px-6 lg:px-8 bg-white">
+      <section 
+        ref={categoryRef}
+        className="py-14 px-4 sm:px-6 lg:px-8 bg-white"
+        style={{
+          animation: categoryVisible ? 'fadeInUp 0.6s ease-out' : 'none',
+          opacity: categoryVisible ? 1 : 0
+        }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <p className="font-sans text-sm font-semibold tracking-widest uppercase mb-2" style={{ color: '#c8922a' }}>
@@ -155,7 +181,7 @@ export function HomePage() {
                 className="rounded-xl p-8 text-center transition-all hover:shadow-lg border-2"
                 style={{ backgroundColor: cat.bg, borderColor: cat.border }}
               >
-                <h3 className="font-serif font-bold text-xl mb-2" style={{ color: '#1a0a00' }}>
+                <h3 className="font-sans font-bold text-xl mb-2" style={{ color: '#1a0a00' }}>
                   {cat.name}
                 </h3>
                 <p className="font-sans text-sm" style={{ color: '#8a6a40' }}>{cat.desc}</p>
@@ -168,7 +194,7 @@ export function HomePage() {
       {/* Banner liên hệ */}
       <section className="py-14 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: '#8b1a1a' }}>
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-serif text-3xl font-bold mb-3 text-white">
+          <h2 className="font-sans text-3xl font-bold mb-3 text-white">
             Đặt Hàng Ngay Hôm Nay
           </h2>
           <p className="font-sans text-white/80 mb-8">

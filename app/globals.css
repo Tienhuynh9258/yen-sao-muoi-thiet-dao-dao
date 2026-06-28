@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
 
 @import 'tailwindcss';
 @import 'tw-animate-css';
@@ -7,7 +7,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: 'Merriweather', 'Georgia', serif;
+  --font-heading: 'Noto Sans', system-ui, sans-serif;
   --font-sans: 'Noto Sans', system-ui, sans-serif;
   --font-mono: 'Courier New', monospace;
   --color-sidebar-ring: var(--sidebar-ring);
@@ -91,59 +91,15 @@
   --radius: 0.5rem;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @layer base {
   * {
     @apply border-border;
   }
+
   html,
   body {
     background-color: #fdf8f3;
     color: #1a0a00;
     font-family: 'Noto Sans', system-ui, sans-serif;
-  }
-}
-
-@layer utilities {
-  .animate-fadeInUp {
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-  .animate-slideInLeft {
-    animation: slideInLeft 0.6s ease-out forwards;
-  }
-  .animate-slideInRight {
-    animation: slideInRight 0.6s ease-out forwards;
   }
 }
