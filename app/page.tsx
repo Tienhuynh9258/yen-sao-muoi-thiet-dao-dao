@@ -1,7 +1,9 @@
 'use client'
 
 import { AppProvider } from '@/app/context'
+import { AboutPage } from '@/components/AboutPage'
 import { CartPage } from '@/components/CartPage'
+import { ContactPage } from '@/components/ContactPage'
 import { Footer } from '@/components/Footer'
 import { FloatingContacts } from '@/components/FloatingContacts'
 import { Header } from '@/components/Header'
@@ -22,6 +24,8 @@ function PageContent() {
         {currentPage === 'shop' && <ShopPage />}
         {currentPage === 'product-detail' && <ProductDetailPage />}
         {currentPage === 'cart' && <CartPage />}
+        {currentPage === 'about' && <AboutPage />}
+        {currentPage === 'contact' && <ContactPage />}
       </div>
 
       <Footer />

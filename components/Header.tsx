@@ -12,7 +12,7 @@ export function Header() {
   const navLinks = [
     { label: 'Trang chủ', page: 'home' },
     { label: 'Sản phẩm', page: 'shop' },
-    { label: 'Về chúng tôi', page: 'about' },
+    { label: 'Giới thiệu', page: 'about' },
     { label: 'Liên hệ', page: 'contact' },
   ] as const
 

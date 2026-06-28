@@ -27,11 +27,12 @@ export function Footer() {
               {[
                 { label: 'Trang Chủ', page: 'home' },
                 { label: 'Cửa Hàng', page: 'shop' },
-                { label: 'Về Chúng Tôi', page: 'about' },
+                { label: 'Giới Thiệu', page: 'about' },
+                { label: 'Liên Hệ', page: 'contact' },
               ].map((link) => (
                 <li key={link.page}>
                   <button
-                    onClick={() => setCurrentPage(link.page as 'home' | 'shop' | 'about')}
+                    onClick={() => setCurrentPage(link.page as 'home' | 'shop' | 'about' | 'contact')}
                     className="font-sans text-sm transition-colors hover:underline"
                     style={{ color: 'rgba(255,255,255,0.75)' }}
                   >
