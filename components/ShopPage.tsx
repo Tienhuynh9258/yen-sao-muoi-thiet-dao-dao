@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/app/context'
 import { categories, products } from '@/lib/products'
-import { ChevronDown, Filter } from 'lucide-react'
+import { Filter } from 'lucide-react'
 import { useState } from 'react'
 import { ProductCard } from './ProductCard'
 
@@ -10,13 +10,10 @@ export function ShopPage() {
   const { categoryFilter, setCategoryFilter, sortBy, setSortBy } = useAppContext()
   const [showFilters, setShowFilters] = useState(false)
 
-  // Filter products
   let filteredProducts = products
   if (categoryFilter) {
     filteredProducts = filteredProducts.filter((p) => p.category === categoryFilter)
   }
-
-  // Sort products
   if (sortBy === 'price-low') {
     filteredProducts = [...filteredProducts].sort((a, b) => a.price - b.price)
   } else if (sortBy === 'price-high') {
@@ -25,84 +22,80 @@ export function ShopPage() {
     filteredProducts = [...filteredProducts].sort((a, b) => b.rating - a.rating)
   }
 
+  const filterBtnClass = (active: boolean) =>
+    `w-full text-left px-3 py-2 rounded-lg font-sans text-sm font-medium transition-colors ${
+      active ? 'text-white' : ''
+    }`
+
   return (
-    <main className="bg-background min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Bộ Sưu Tập Cao Cấp
+    <main style={{ backgroundColor: '#fdf8f3' }} className="min-h-screen">
+      {/* Banner đầu trang */}
+      <div style={{ backgroundColor: '#8b1a1a' }} className="py-10 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-2">
+            Cửa Hàng Yến Sào
           </h1>
-          <p className="font-sans text-muted max-w-2xl">
-            Duyệt qua lựa chọn độc quyền các sản phẩm yến sào cao cấp của chúng tôi
+          <p className="font-sans text-white/75 text-sm">
+            Lựa chọn độc quyền các sản phẩm yến sào cao cấp 100% nguyên chất
           </p>
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
-          <div className="w-full lg:w-64 flex-shrink-0">
+          <div className="w-full lg:w-60 flex-shrink-0">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden w-full flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-lg mb-4"
+              className="lg:hidden w-full flex items-center gap-2 px-4 py-2.5 rounded-lg mb-4 border font-sans font-semibold text-sm"
+              style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0', color: '#1a0a00' }}
             >
               <Filter className="w-4 h-4" />
-              <span className="font-sans font-semibold text-foreground">Bộ Lọc</span>
+              Bộ Lọc
             </button>
 
-            <div
-              className={`${showFilters ? 'block' : 'hidden'} lg:block bg-card rounded-lg p-6 border border-border`}
-            >
-              {/* Category Filter */}
-              <div className="mb-8">
-                <h3 className="font-serif font-bold text-foreground mb-4">Danh Mục</h3>
-                <div className="space-y-2">
-                  <button
-                    onClick={() => setCategoryFilter('')}
-                    className={`w-full text-left px-3 py-2 rounded transition-colors font-sans text-sm ${
-                      categoryFilter === ''
-                        ? 'bg-primary text-card'
-                        : 'hover:bg-hover text-foreground'
-                    }`}
-                  >
-                    Tất Cả Sản Phẩm
-                  </button>
-                  {categories.map((cat) => (
+            <div className={`${showFilters ? 'block' : 'hidden'} lg:block rounded-xl p-5 border`} style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
+              {/* Danh mục */}
+              <div className="mb-7">
+                <h3 className="font-serif font-bold mb-3" style={{ color: '#1a0a00' }}>Danh Mục</h3>
+                <div className="space-y-1">
+                  {[{ value: '', label: 'Tất Cả Sản Phẩm' }, ...categories.map((c) => ({ value: c, label: c }))].map((opt) => (
                     <button
-                      key={cat}
-                      onClick={() => setCategoryFilter(cat)}
-                      className={`w-full text-left px-3 py-2 rounded transition-colors font-sans text-sm ${
-                        categoryFilter === cat
-                          ? 'bg-primary text-card'
-                          : 'hover:bg-hover text-foreground'
-                      }`}
+                      key={opt.value}
+                      onClick={() => setCategoryFilter(opt.value)}
+                      className={filterBtnClass(categoryFilter === opt.value)}
+                      style={
+                        categoryFilter === opt.value
+                          ? { backgroundColor: '#c8922a', color: '#ffffff' }
+                          : { color: '#1a0a00' }
+                      }
                     >
-                      {cat}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Sort Filter */}
+              {/* Sắp xếp */}
               <div>
-                <h3 className="font-serif font-bold text-foreground mb-4">Sắp Xếp Theo</h3>
-                <div className="space-y-2">
+                <h3 className="font-serif font-bold mb-3" style={{ color: '#1a0a00' }}>Sắp Xếp Theo</h3>
+                <div className="space-y-1">
                   {[
                     { value: 'price-low', label: 'Giá: Thấp đến Cao' },
                     { value: 'price-high', label: 'Giá: Cao đến Thấp' },
                     { value: 'rating', label: 'Xếp Hạng Cao Nhất' },
-                  ].map((option) => (
+                  ].map((opt) => (
                     <button
-                      key={option.value}
-                      onClick={() =>
-                        setSortBy(option.value as 'price-low' | 'price-high' | 'rating')
+                      key={opt.value}
+                      onClick={() => setSortBy(opt.value as 'price-low' | 'price-high' | 'rating')}
+                      className={filterBtnClass(sortBy === opt.value)}
+                      style={
+                        sortBy === opt.value
+                          ? { backgroundColor: '#c8922a', color: '#ffffff' }
+                          : { color: '#1a0a00' }
                       }
-                      className={`w-full text-left px-3 py-2 rounded transition-colors font-sans text-sm ${
-                        sortBy === option.value
-                          ? 'bg-primary text-card'
-                          : 'hover:bg-hover text-foreground'
-                      }`}
                     >
-                      {option.label}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
@@ -110,16 +103,14 @@ export function ShopPage() {
             </div>
           </div>
 
-          {/* Products Grid */}
+          {/* Lưới sản phẩm */}
           <div className="flex-1">
             {filteredProducts.length > 0 ? (
               <>
-                <div className="mb-6">
-                  <p className="font-sans text-sm text-muted">
-                    Đang hiển thị {filteredProducts.length} sản phẩm
-                    {categoryFilter && ` trong ${categoryFilter}`}
-                  </p>
-                </div>
+                <p className="font-sans text-sm mb-5" style={{ color: '#8a6a40' }}>
+                  Hiển thị <strong>{filteredProducts.length}</strong> sản phẩm
+                  {categoryFilter && ` trong danh mục "${categoryFilter}"`}
+                </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
@@ -127,10 +118,10 @@ export function ShopPage() {
                 </div>
               </>
             ) : (
-              <div className="text-center py-16">
-                <p className="font-serif text-2xl text-foreground mb-2">Không tìm thấy sản phẩm</p>
-                <p className="font-sans text-muted">
-                  Hãy thử điều chỉnh bộ lọc của bạn để tìm những gì bạn đang tìm kiếm
+              <div className="text-center py-20">
+                <p className="font-serif text-2xl font-bold mb-2" style={{ color: '#1a0a00' }}>Không tìm thấy sản phẩm</p>
+                <p className="font-sans text-sm" style={{ color: '#8a6a40' }}>
+                  Hãy thử điều chỉnh bộ lọc của bạn
                 </p>
               </div>
             )}

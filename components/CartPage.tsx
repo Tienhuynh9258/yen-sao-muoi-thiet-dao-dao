@@ -3,6 +3,7 @@
 import { useAppContext } from '@/app/context'
 import { formatPrice } from '@/lib/products'
 import { ArrowLeft, Minus, Plus, Trash2, X } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export function CartPage() {
@@ -30,79 +31,63 @@ export function CartPage() {
       setShowCheckout(false)
       setCheckoutSuccess(false)
       setCurrentPage('home')
-    }, 3000)
+    }, 4000)
   }
 
+  // Màn hình thành công
   if (checkoutSuccess) {
     return (
-      <main className="bg-background min-h-screen flex items-center justify-center px-4">
-        <div className="bg-card rounded-lg shadow-lg p-12 max-w-md w-full text-center">
-          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg
-              className="w-8 h-8 text-primary"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
+      <main className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#fdf8f3' }}>
+        <div className="rounded-2xl shadow-xl p-12 max-w-md w-full text-center border" style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
+          <div
+            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+            style={{ backgroundColor: '#fdf3e3' }}
+          >
+            <svg className="w-8 h-8" style={{ color: '#c8922a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-2">Đơn Hàng Được Xác Nhận!</h2>
-          <p className="font-sans text-muted mb-6">
-            Cảm ơn bạn đã mua hàng. Đội ngũ của chúng tôi sẽ liên hệ với bạn trong thời gian sắp tới.
+          <h2 className="font-serif text-2xl font-bold mb-2" style={{ color: '#1a0a00' }}>Đặt Hàng Thành Công!</h2>
+          <p className="font-sans text-sm mb-5" style={{ color: '#8a6a40' }}>
+            Cảm ơn bạn đã tin tưởng. Chúng tôi sẽ liên hệ xác nhận đơn hàng sớm nhất.
           </p>
-          <div className="bg-primary/10 rounded-lg p-4 mb-6">
-            <p className="font-sans text-sm text-foreground">
-              Tổng cộng: <span className="font-bold text-primary">{formatPrice(total)}</span>
+          <div className="rounded-lg p-4 mb-6" style={{ backgroundColor: '#fdf3e3' }}>
+            <p className="font-sans text-sm" style={{ color: '#1a0a00' }}>
+              Tổng thanh toán: <span className="font-bold" style={{ color: '#c8922a' }}>{formatPrice(total)}</span>
             </p>
           </div>
-          <p className="font-sans text-sm text-muted mb-6">
-            Chúng tôi sẽ gửi cập nhật cho bạn qua Zalo và email
-          </p>
           <a
-            href="https://zalo.me"
+            href="https://zalo.me/0123456789"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-card font-sans font-bold py-2 px-6 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 font-sans font-bold py-2.5 px-6 rounded-lg text-white"
+            style={{ backgroundColor: '#0068ff' }}
           >
-            Liên Hệ Trên Zalo
+            Theo Dõi Trên Zalo
           </a>
         </div>
       </main>
     )
   }
 
+  // Giỏ hàng trống
   if (cartItems.length === 0 && !showCheckout) {
     return (
-      <main className="bg-background min-h-screen flex items-center justify-center px-4">
+      <main className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#fdf8f3' }}>
         <div className="text-center">
-          <div className="w-24 h-24 bg-border rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg
-              className="w-12 h-12 text-muted"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
+          <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: '#fdf3e3' }}>
+            <svg className="w-12 h-12" style={{ color: '#c8922a' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </div>
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Giỏ hàng của bạn trống</h2>
-          <p className="font-sans text-muted mb-8 max-w-sm">
-            Khám phá bộ sưu tập yến sào cao cấp của chúng tôi và thêm các mục vào giỏ hàng của bạn
+          <h2 className="font-serif text-3xl font-bold mb-2" style={{ color: '#1a0a00' }}>Giỏ hàng trống</h2>
+          <p className="font-sans text-sm mb-8 max-w-xs mx-auto" style={{ color: '#8a6a40' }}>
+            Hãy khám phá bộ sưu tập yến sào cao cấp và thêm vào giỏ hàng
           </p>
           <button
             onClick={() => setCurrentPage('shop')}
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 px-8 rounded-lg transition-colors"
+            className="inline-flex items-center gap-2 font-sans font-bold py-3 px-8 rounded-lg text-white transition-all hover:opacity-90"
+            style={{ backgroundColor: '#c8922a' }}
           >
             <ArrowLeft className="w-5 h-5" />
             Tiếp Tục Mua Sắm
@@ -113,232 +98,192 @@ export function CartPage() {
   }
 
   return (
-    <main className="bg-background min-h-screen">
+    <main style={{ backgroundColor: '#fdf8f3' }} className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
         <button
           onClick={() => setCurrentPage('shop')}
-          className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8 font-sans font-semibold"
+          className="flex items-center gap-2 font-sans font-semibold mb-6 transition-colors hover:underline"
+          style={{ color: '#c8922a' }}
         >
           <ArrowLeft className="w-5 h-5" />
           Tiếp Tục Mua Sắm
         </button>
 
-        <h1 className="font-serif text-4xl font-bold text-foreground mb-8">Giỏ Hàng</h1>
+        <h1 className="font-serif text-3xl font-bold mb-8" style={{ color: '#1a0a00' }}>Giỏ Hàng</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
-          <div className="lg:col-span-2">
-            <div className="bg-card rounded-lg border border-border overflow-hidden">
-              {cartItems.map((item) => (
-                <div key={item.product.id} className="border-b border-border last:border-b-0 p-6">
-                  <div className="flex gap-6">
-                    <div className="w-24 h-24 bg-hover rounded-lg flex-shrink-0" />
+          {/* Danh sách sản phẩm */}
+          <div className="lg:col-span-2 space-y-4">
+            {cartItems.map((item) => (
+              <div
+                key={item.product.id}
+                className="flex gap-4 p-5 rounded-xl border"
+                style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}
+              >
+                <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0" style={{ backgroundColor: '#fdf3e3' }}>
+                  <Image
+                    src={item.product.image}
+                    alt={item.product.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
-                    <div className="flex-1">
-                      <h3 className="font-serif font-bold text-foreground mb-2">
-                        {item.product.name}
-                      </h3>
-                      <p className="font-sans text-sm text-muted mb-4">
-                        {item.product.category}
-                      </p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-serif font-bold mb-1 truncate" style={{ color: '#1a0a00' }}>
+                    {item.product.name}
+                  </h3>
+                  <p className="font-sans text-xs mb-3" style={{ color: '#8a6a40' }}>
+                    {item.product.category}
+                  </p>
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <button
-                            onClick={() =>
-                              updateCartQuantity(item.product.id, item.quantity - 1)
-                            }
-                            className="p-1 hover:bg-hover rounded transition-colors"
-                          >
-                            <Minus className="w-4 h-4" />
-                          </button>
-                          <span className="font-sans font-semibold w-8 text-center">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() =>
-                              updateCartQuantity(item.product.id, item.quantity + 1)
-                            }
-                            className="p-1 hover:bg-hover rounded transition-colors"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
-                        </div>
-
-                        <div className="text-right">
-                          <p className="font-serif font-bold text-primary text-lg">
-                            {formatPrice(item.product.price * item.quantity)}
-                          </p>
-                          <p className="font-sans text-xs text-muted">
-                            {formatPrice(item.product.price)} mỗi cái
-                          </p>
-                        </div>
-                      </div>
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center rounded-lg border" style={{ borderColor: '#e8d5b0' }}>
+                      <button
+                        onClick={() => updateCartQuantity(item.product.id, item.quantity - 1)}
+                        className="px-3 py-1.5 font-bold transition-colors hover:bg-gray-50"
+                        style={{ color: '#1a0a00' }}
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="px-4 py-1.5 font-sans font-semibold text-sm border-x" style={{ borderColor: '#e8d5b0', color: '#1a0a00' }}>
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateCartQuantity(item.product.id, item.quantity + 1)}
+                        className="px-3 py-1.5 font-bold transition-colors hover:bg-gray-50"
+                        style={{ color: '#1a0a00' }}
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
                     </div>
 
-                    <button
-                      onClick={() => removeFromCart(item.product.id)}
-                      className="p-1 hover:bg-hover rounded text-accent transition-colors flex-shrink-0"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
+                    <div className="flex items-center gap-3">
+                      <p className="font-serif font-bold" style={{ color: '#c8922a' }}>
+                        {formatPrice(item.product.price * item.quantity)}
+                      </p>
+                      <button
+                        onClick={() => removeFromCart(item.product.id)}
+                        className="p-1.5 rounded-lg transition-colors hover:bg-red-50"
+                        style={{ color: '#8b1a1a' }}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
-          {/* Order Summary */}
+          {/* Tóm tắt đơn hàng */}
           <div>
-            <div className="bg-card rounded-lg border border-border p-6 sticky top-24">
-              <h3 className="font-serif font-bold text-lg text-foreground mb-6">Tóm Tắt Đơn Hàng</h3>
+            <div className="rounded-xl border p-6 sticky top-24" style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
+              <h3 className="font-serif font-bold text-lg mb-5" style={{ color: '#1a0a00' }}>Tóm Tắt Đơn Hàng</h3>
 
-              <div className="space-y-4 mb-6 pb-6 border-b border-border">
+              <div className="space-y-3 mb-5 pb-5 border-b" style={{ borderColor: '#e8d5b0' }}>
                 <div className="flex justify-between">
-                  <span className="font-sans text-muted">Tổng Phụ</span>
-                  <span className="font-sans font-semibold">{formatPrice(subtotal)}</span>
+                  <span className="font-sans text-sm" style={{ color: '#8a6a40' }}>Tạm tính</span>
+                  <span className="font-sans font-semibold text-sm" style={{ color: '#1a0a00' }}>{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-sans text-muted">Vận Chuyển</span>
-                  <span className="font-sans font-semibold">
-                    {shipping === 0 ? 'MIỄN PHÍ' : formatPrice(shipping)}
+                  <span className="font-sans text-sm" style={{ color: '#8a6a40' }}>Vận chuyển</span>
+                  <span className="font-sans font-semibold text-sm" style={{ color: shipping === 0 ? '#2eb82e' : '#1a0a00' }}>
+                    {shipping === 0 ? 'Miễn phí' : formatPrice(shipping)}
                   </span>
                 </div>
               </div>
 
-              <div className="flex justify-between mb-6">
-                <span className="font-serif font-bold text-lg">Tổng Cộng</span>
-                <span className="font-serif font-bold text-primary text-xl">
+              <div className="flex justify-between mb-5">
+                <span className="font-serif font-bold" style={{ color: '#1a0a00' }}>Tổng cộng</span>
+                <span className="font-serif font-bold text-xl" style={{ color: '#c8922a' }}>
                   {formatPrice(total)}
                 </span>
               </div>
 
-              {shipping === 0 && (
-                <p className="font-sans text-xs text-primary bg-primary/10 rounded p-2 mb-4">
-                  Miễn phí vận chuyển cho đơn hàng trên ₫5.000.000
+              {subtotal < 5000000 && (
+                <p className="font-sans text-xs rounded-lg p-3 mb-4" style={{ backgroundColor: '#fdf3e3', color: '#8a6a40' }}>
+                  Mua thêm <strong style={{ color: '#c8922a' }}>{formatPrice(5000000 - subtotal)}</strong> để được miễn phí vận chuyển
                 </p>
               )}
 
               <button
                 onClick={() => setShowCheckout(true)}
-                className="w-full bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 rounded-lg transition-colors"
+                className="w-full font-sans font-bold py-3 rounded-lg text-white transition-all hover:opacity-90"
+                style={{ backgroundColor: '#8b1a1a' }}
               >
-                Tiếp Tục Thanh Toán
+                Tiến Hành Thanh Toán
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Checkout Modal */}
+      {/* Modal Thanh Toán */}
       {showCheckout && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-card rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-card border-b border-border p-6 flex items-center justify-between">
-              <h2 className="font-serif text-2xl font-bold text-foreground">Thanh Toán</h2>
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#ffffff' }}>
+            <div className="sticky top-0 border-b p-5 flex items-center justify-between" style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
+              <h2 className="font-serif text-xl font-bold" style={{ color: '#1a0a00' }}>Thông Tin Đặt Hàng</h2>
               <button
                 onClick={() => setShowCheckout(false)}
-                className="p-2 hover:bg-hover rounded transition-colors"
+                className="p-2 rounded-lg transition-colors hover:bg-gray-100"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" style={{ color: '#1a0a00' }} />
               </button>
             </div>
 
             <form onSubmit={handleCheckout} className="p-6 space-y-4">
-              <div>
-                <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Họ Và Tên
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
-                />
-              </div>
+              {[
+                { key: 'fullName', label: 'Họ và Tên', type: 'text' },
+                { key: 'phone', label: 'Số Điện Thoại', type: 'tel' },
+                { key: 'address', label: 'Địa Chỉ', type: 'text' },
+                { key: 'city', label: 'Thành Phố / Tỉnh', type: 'text' },
+              ].map(({ key, label, type }) => (
+                <div key={key}>
+                  <label className="font-sans text-sm font-semibold block mb-1.5" style={{ color: '#1a0a00' }}>
+                    {label}
+                  </label>
+                  <input
+                    type={type}
+                    required
+                    value={formData[key as keyof typeof formData]}
+                    onChange={(e) => setFormData({ ...formData, [key]: e.target.value })}
+                    className="w-full border rounded-lg px-4 py-2.5 font-sans text-sm focus:outline-none"
+                    style={{ borderColor: '#e8d5b0', color: '#1a0a00', backgroundColor: '#fdf8f3' }}
+                  />
+                </div>
+              ))}
 
               <div>
-                <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Số Điện Thoại
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Địa Chỉ
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Thành Phố
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.city}
-                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
-                />
-              </div>
-
-              <div>
-                <label className="font-sans text-sm font-semibold text-foreground block mb-2">
+                <label className="font-sans text-sm font-semibold block mb-1.5" style={{ color: '#1a0a00' }}>
                   Phương Thức Thanh Toán
                 </label>
                 <select
                   value={formData.paymentMethod}
-                  onChange={(e) =>
-                    setFormData({ ...formData, paymentMethod: e.target.value })
-                  }
-                  className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
+                  onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
+                  className="w-full border rounded-lg px-4 py-2.5 font-sans text-sm focus:outline-none"
+                  style={{ borderColor: '#e8d5b0', color: '#1a0a00', backgroundColor: '#fdf8f3' }}
                 >
                   <option value="bank-transfer">Chuyển Khoản Ngân Hàng</option>
-                  <option value="credit-card">Thẻ Tín Dụng</option>
                   <option value="cash-on-delivery">Thanh Toán Khi Nhận Hàng</option>
+                  <option value="zalo-pay">ZaloPay</option>
                 </select>
               </div>
 
-              <div className="bg-primary/10 rounded-lg p-4">
-                <p className="font-sans text-sm">
-                  Tổng Đơn Hàng: <span className="font-bold text-primary">{formatPrice(total)}</span>
-                </p>
+              <div className="rounded-xl p-4" style={{ backgroundColor: '#fdf3e3' }}>
+                <div className="flex justify-between items-center">
+                  <span className="font-sans text-sm font-semibold" style={{ color: '#1a0a00' }}>Tổng thanh toán</span>
+                  <span className="font-serif font-bold text-xl" style={{ color: '#c8922a' }}>{formatPrice(total)}</span>
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 rounded-lg transition-colors"
+                className="w-full font-sans font-bold py-3 rounded-lg text-white transition-all hover:opacity-90"
+                style={{ backgroundColor: '#8b1a1a' }}
               >
-                Hoàn Tất Đơn Hàng
+                Xác Nhận Đặt Hàng
               </button>
             </form>
           </div>
