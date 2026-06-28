@@ -14,20 +14,20 @@ export function Footer() {
           <div>
             <h3 className="font-serif font-bold text-lg mb-4">Yến Sào</h3>
             <p className="font-sans text-sm text-card/80 leading-relaxed">
-              Premium Vietnamese bird&apos;s nest products. Authentic heritage, luxury craftsmanship.
+              Sản phẩm yến sào cao cấp của Việt Nam. Di sản xác thực, thủ công sang trọng.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif font-bold mb-4">Quick Links</h4>
+            <h4 className="font-serif font-bold mb-4">Liên Kết Nhanh</h4>
             <ul className="space-y-2">
               <li>
                 <button
                   onClick={() => setCurrentPage('home')}
                   className="font-sans text-sm text-card/80 hover:text-primary transition-colors"
                 >
-                  Home
+                  Trang Chủ
                 </button>
               </li>
               <li>
@@ -35,7 +35,7 @@ export function Footer() {
                   onClick={() => setCurrentPage('shop')}
                   className="font-sans text-sm text-card/80 hover:text-primary transition-colors"
                 >
-                  Shop
+                  Cửa Hàng
                 </button>
               </li>
               <li>
@@ -43,7 +43,7 @@ export function Footer() {
                   onClick={() => setCurrentPage('about')}
                   className="font-sans text-sm text-card/80 hover:text-primary transition-colors"
                 >
-                  About
+                  Về Chúng Tôi
                 </button>
               </li>
             </ul>
@@ -51,21 +51,21 @@ export function Footer() {
 
           {/* Information */}
           <div>
-            <h4 className="font-serif font-bold mb-4">Information</h4>
+            <h4 className="font-serif font-bold mb-4">Thông Tin</h4>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="font-sans text-sm text-card/80 hover:text-primary transition-colors">
-                  Privacy Policy
+                  Chính Sách Bảo Mật
                 </a>
               </li>
               <li>
                 <a href="#" className="font-sans text-sm text-card/80 hover:text-primary transition-colors">
-                  Terms of Service
+                  Điều Khoản Dịch Vụ
                 </a>
               </li>
               <li>
                 <a href="#" className="font-sans text-sm text-card/80 hover:text-primary transition-colors">
-                  Returns & Exchange
+                  Hoàn Trả & Trao Đổi
                 </a>
               </li>
             </ul>
@@ -73,7 +73,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-serif font-bold mb-4">Contact</h4>
+            <h4 className="font-serif font-bold mb-4">Liên Hệ</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-1 flex-shrink-0 text-primary" />

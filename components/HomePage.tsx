@@ -28,16 +28,16 @@ export function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <h1 className="font-serif text-5xl md:text-6xl font-bold text-card mb-6">
-              Premium Vietnamese Heritage
+              Yến Sào Cao Cấp Việt Nam
             </h1>
             <p className="font-sans text-xl text-card/90 mb-8 leading-relaxed">
-              Experience the luxury and authenticity of traditional bird&apos;s nest products, crafted with excellence for discerning connoisseurs.
+              Trải nghiệm sự sang trọng và sự xác thực của các sản phẩm yến sào truyền thống, được chế tác với sự xuất sắc cho những người sành ăn.
             </p>
             <button
               onClick={() => setCurrentPage('shop')}
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 px-8 rounded-lg transition-colors"
             >
-              Explore Collection
+              Khám phá bộ sưu tập
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
@@ -51,18 +51,18 @@ export function HomePage() {
             {[
               {
                 icon: Award,
-                title: 'Premium Quality',
-                description: 'Grade A & AAA selection, 100% pure bird\'s nest products',
+                title: 'Chất Lượng Cao Cấp',
+                description: 'Lựa chọn loại A & AAA, sản phẩm yến sào 100% nguyên chất',
               },
               {
                 icon: Leaf,
-                title: 'Natural Heritage',
-                description: 'Traditional harvesting methods preserving authenticity',
+                title: 'Di Sản Tự Nhiên',
+                description: 'Phương pháp thu hoạch truyền thống bảo tồn tính xác thực',
               },
               {
                 icon: Sparkles,
-                title: 'Luxury Experience',
-                description: 'Exclusive products for those who appreciate excellence',
+                title: 'Trải Nghiệm Sang Trọng',
+                description: 'Các sản phẩm độc quyền cho những ai yêu thích sự xuất sắc',
               },
             ].map((item, index) => (
               <div key={index} className="text-center">
@@ -86,10 +86,10 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-serif text-4xl font-bold text-foreground mb-4">
-              Featured Collection
+              Bộ Sưu Tập Nổi Bật
             </h2>
             <p className="font-sans text-muted max-w-2xl mx-auto">
-              Discover our most coveted bird&apos;s nest selections, carefully curated for premium quality
+              Khám phá những lựa chọn yến sào được yêu thích nhất của chúng tôi, được chọn lọc cẩn thận để đảm bảo chất lượng cao
             </p>
           </div>
 
@@ -104,7 +104,7 @@ export function HomePage() {
               onClick={() => setCurrentPage('shop')}
               className="inline-flex items-center gap-2 border-2 border-primary hover:bg-primary hover:text-card text-primary font-serif font-bold py-3 px-8 rounded-lg transition-colors"
             >
-              View All Products
+              Xem Tất Cả Sản Phẩm
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
@@ -115,14 +115,14 @@ export function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-serif text-3xl font-bold text-foreground mb-12 text-center">
-            Shop by Category
+            Mua Sắm Theo Danh Mục
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { name: 'Standard', color: 'bg-border', desc: 'Quality selection' },
-              { name: 'Premium', color: 'bg-primary/20', desc: 'Superior grade' },
-              { name: 'Luxury', color: 'bg-accent/20', desc: 'Elite collection' },
+              { name: 'Standard', color: 'bg-border', desc: 'Lựa chọn chất lượng' },
+              { name: 'Premium', color: 'bg-primary/20', desc: 'Loại cao cấp' },
+              { name: 'Luxury', color: 'bg-accent/20', desc: 'Bộ sưu tập tinh hoa' },
             ].map((cat) => (
               <button
                 key={cat.name}
@@ -143,19 +143,19 @@ export function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-foreground text-card">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-serif text-3xl font-bold mb-4">
-            Join Our Community
+            Tham Gia Cộng Đồng Của Chúng Tôi
           </h2>
           <p className="font-sans text-card/80 mb-8">
-            Subscribe to receive exclusive offers and premium product updates
+            Đăng ký để nhận các ưu đãi độc quyền và cập nhật sản phẩm cao cấp
           </p>
           <div className="flex gap-2">
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Nhập email của bạn"
               className="flex-1 px-4 py-3 rounded-lg text-foreground font-sans"
             />
             <button className="bg-primary hover:bg-primary/90 text-card font-sans font-bold px-6 py-3 rounded-lg transition-colors">
-              Subscribe
+              Đăng ký
             </button>
           </div>
         </div>

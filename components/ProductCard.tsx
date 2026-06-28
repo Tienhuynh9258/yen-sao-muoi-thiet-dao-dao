@@ -78,7 +78,7 @@ export function ProductCard({ product }: ProductCardProps) {
             className="flex-1 bg-accent hover:bg-accent/90 text-card font-sans font-semibold py-2 rounded-lg transition-colors flex items-center justify-center gap-2"
           >
             <ShoppingCart className="w-4 h-4" />
-            <span className="hidden sm:inline">Add</span>
+            <span className="hidden sm:inline">Thêm</span>
           </button>
           <button className="flex-1 border border-border hover:bg-hover text-foreground font-sans font-semibold py-2 rounded-lg transition-colors flex items-center justify-center">
             <Heart className="w-4 h-4" />

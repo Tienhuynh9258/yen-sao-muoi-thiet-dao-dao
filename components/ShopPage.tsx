@@ -31,10 +31,10 @@ export function ShopPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Premium Collection
+            Bộ Sưu Tập Cao Cấp
           </h1>
           <p className="font-sans text-muted max-w-2xl">
-            Browse our exclusive selection of premium bird&apos;s nest products
+            Duyệt qua lựa chọn độc quyền các sản phẩm yến sào cao cấp của chúng tôi
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export function ShopPage() {
               className="lg:hidden w-full flex items-center gap-2 bg-card border border-border px-4 py-2 rounded-lg mb-4"
             >
               <Filter className="w-4 h-4" />
-              <span className="font-sans font-semibold text-foreground">Filters</span>
+              <span className="font-sans font-semibold text-foreground">Bộ Lọc</span>
             </button>
 
             <div
@@ -54,7 +54,7 @@ export function ShopPage() {
             >
               {/* Category Filter */}
               <div className="mb-8">
-                <h3 className="font-serif font-bold text-foreground mb-4">Category</h3>
+                <h3 className="font-serif font-bold text-foreground mb-4">Danh Mục</h3>
                 <div className="space-y-2">
                   <button
                     onClick={() => setCategoryFilter('')}
@@ -64,7 +64,7 @@ export function ShopPage() {
                         : 'hover:bg-hover text-foreground'
                     }`}
                   >
-                    All Products
+                    Tất Cả Sản Phẩm
                   </button>
                   {categories.map((cat) => (
                     <button
@@ -84,12 +84,12 @@ export function ShopPage() {
 
               {/* Sort Filter */}
               <div>
-                <h3 className="font-serif font-bold text-foreground mb-4">Sort By</h3>
+                <h3 className="font-serif font-bold text-foreground mb-4">Sắp Xếp Theo</h3>
                 <div className="space-y-2">
                   {[
-                    { value: 'price-low', label: 'Price: Low to High' },
-                    { value: 'price-high', label: 'Price: High to Low' },
-                    { value: 'rating', label: 'Highest Rated' },
+                    { value: 'price-low', label: 'Giá: Thấp đến Cao' },
+                    { value: 'price-high', label: 'Giá: Cao đến Thấp' },
+                    { value: 'rating', label: 'Xếp Hạng Cao Nhất' },
                   ].map((option) => (
                     <button
                       key={option.value}
@@ -116,8 +116,8 @@ export function ShopPage() {
               <>
                 <div className="mb-6">
                   <p className="font-sans text-sm text-muted">
-                    Showing {filteredProducts.length} products
-                    {categoryFilter && ` in ${categoryFilter}`}
+                    Đang hiển thị {filteredProducts.length} sản phẩm
+                    {categoryFilter && ` trong ${categoryFilter}`}
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -128,9 +128,9 @@ export function ShopPage() {
               </>
             ) : (
               <div className="text-center py-16">
-                <p className="font-serif text-2xl text-foreground mb-2">No products found</p>
+                <p className="font-serif text-2xl text-foreground mb-2">Không tìm thấy sản phẩm</p>
                 <p className="font-sans text-muted">
-                  Try adjusting your filters to find what you&apos;re looking for
+                  Hãy thử điều chỉnh bộ lọc của bạn để tìm những gì bạn đang tìm kiếm
                 </p>
               </div>
             )}

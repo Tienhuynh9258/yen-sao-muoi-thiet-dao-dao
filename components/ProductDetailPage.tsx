@@ -14,7 +14,7 @@ export function ProductDetailPage() {
   if (!selectedProduct) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="font-serif text-2xl text-foreground">Product not found</p>
+        <p className="font-serif text-2xl text-foreground">Không tìm thấy sản phẩm</p>
       </div>
     )
   }
@@ -34,7 +34,7 @@ export function ProductDetailPage() {
           className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8 font-sans font-semibold"
         >
           <ArrowLeft className="w-5 h-5" />
-          Back to Shop
+          Quay Lại Cửa Hàng
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -74,7 +74,7 @@ export function ProductDetailPage() {
                 ))}
               </div>
               <span className="font-sans text-sm text-muted">
-                {selectedProduct.rating} • {selectedProduct.reviews} reviews
+                {selectedProduct.rating} • {selectedProduct.reviews} đánh giá
               </span>
             </div>
 
@@ -84,7 +84,7 @@ export function ProductDetailPage() {
                 {formatPrice(selectedProduct.price)}
               </p>
               <p className="font-sans text-sm text-muted mt-2">
-                Free shipping on orders over ₫5,000,000
+                Miễn phí vận chuyển cho đơn hàng trên ₫5.000.000
               </p>
             </div>
 
@@ -116,7 +116,7 @@ export function ProductDetailPage() {
                 className="flex-1 bg-accent hover:bg-accent/90 text-card font-sans font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
                 <ShoppingCart className="w-5 h-5" />
-                Add to Cart
+                Thêm Vào Giỏ
               </button>
 
               <button className="px-6 py-3 border-2 border-primary hover:bg-primary/10 text-primary font-sans font-bold rounded-lg transition-colors">
@@ -127,9 +127,9 @@ export function ProductDetailPage() {
             {/* Features */}
             <div className="space-y-3">
               {[
-                { icon: CheckCircle, text: '100% Authentic Product' },
-                { icon: Zap, text: 'Fast and Secure Delivery' },
-                { icon: CheckCircle, text: 'Money-back Guarantee' },
+                { icon: CheckCircle, text: 'Sản Phẩm 100% Chính Hãng' },
+                { icon: Zap, text: 'Giao Hàng Nhanh và An Toàn' },
+                { icon: CheckCircle, text: 'Bảo Hành Hoàn Tiền' },
               ].map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <feature.icon className="w-5 h-5 text-primary" />
@@ -153,7 +153,7 @@ export function ProductDetailPage() {
                     : 'text-muted hover:text-foreground'
                 }`}
               >
-                {tab === 'description' ? 'Description' : 'Specifications'}
+                {tab === 'description' ? 'Mô Tả' : 'Thông Số Kỹ Thuật'}
               </button>
             ))}
           </div>
@@ -164,8 +164,7 @@ export function ProductDetailPage() {
                 {selectedProduct.description}
               </p>
               <p className="font-sans text-foreground leading-relaxed mt-4">
-                Experience the pinnacle of luxury with our premium bird&apos;s nest selection. Each product is
-                carefully sourced and processed to maintain the highest standards of purity and quality.
+                Trải nghiệm pỉnh cao của sự sang trọng với lựa chọn yến sào cao cấp của chúng tôi. Mỗi sản phẩm được lựa chọn cẩn thận và xử lý để duy trì các tiêu chuẩn cao nhất về độ tinh khiết và chất lượng.
               </p>
             </div>
           )}
@@ -185,16 +184,16 @@ export function ProductDetailPage() {
         {/* Related Products Info */}
         <div className="mt-16 bg-card rounded-lg p-8 text-center border border-border">
           <h3 className="font-serif text-2xl font-bold text-foreground mb-4">
-            Complete Your Collection
+            Hoàn Thành Bộ Sưu Tập Của Bạn
           </h3>
           <p className="font-sans text-muted mb-6">
-            Explore other premium selections from our luxury collection
+            Khám phá các lựa chọn cao cấp khác từ bộ sưu tập sang trọng của chúng tôi
           </p>
           <button
             onClick={() => setCurrentPage('shop')}
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 px-8 rounded-lg transition-colors"
           >
-            View All Products
+            Xem Tất Cả Sản Phẩm
           </button>
         </div>
       </div>

@@ -52,17 +52,17 @@ export function CartPage() {
               />
             </svg>
           </div>
-          <h2 className="font-serif text-2xl font-bold text-foreground mb-2">Order Confirmed!</h2>
+          <h2 className="font-serif text-2xl font-bold text-foreground mb-2">Đơn Hàng Được Xác Nhận!</h2>
           <p className="font-sans text-muted mb-6">
-            Thank you for your purchase. Our team will contact you shortly.
+            Cảm ơn bạn đã mua hàng. Đội ngũ của chúng tôi sẽ liên hệ với bạn trong thời gian sắp tới.
           </p>
           <div className="bg-primary/10 rounded-lg p-4 mb-6">
             <p className="font-sans text-sm text-foreground">
-              Total: <span className="font-bold text-primary">{formatPrice(total)}</span>
+              Tổng cộng: <span className="font-bold text-primary">{formatPrice(total)}</span>
             </p>
           </div>
           <p className="font-sans text-sm text-muted mb-6">
-            We&apos;ll send you updates via Zalo and email
+            Chúng tôi sẽ gửi cập nhật cho bạn qua Zalo và email
           </p>
           <a
             href="https://zalo.me"
@@ -70,7 +70,7 @@ export function CartPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-card font-sans font-bold py-2 px-6 rounded-lg transition-colors"
           >
-            Contact on Zalo
+            Liên Hệ Trên Zalo
           </a>
         </div>
       </main>
@@ -96,16 +96,16 @@ export function CartPage() {
               />
             </svg>
           </div>
-          <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Your cart is empty</h2>
+          <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Giỏ hàng của bạn trống</h2>
           <p className="font-sans text-muted mb-8 max-w-sm">
-            Discover our premium bird&apos;s nest collection and add items to your cart
+            Khám phá bộ sưu tập yến sào cao cấp của chúng tôi và thêm các mục vào giỏ hàng của bạn
           </p>
           <button
             onClick={() => setCurrentPage('shop')}
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 px-8 rounded-lg transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
-            Continue Shopping
+            Tiếp Tục Mua Sắm
           </button>
         </div>
       </main>
@@ -121,10 +121,10 @@ export function CartPage() {
           className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8 font-sans font-semibold"
         >
           <ArrowLeft className="w-5 h-5" />
-          Continue Shopping
+          Tiếp Tục Mua Sắm
         </button>
 
-        <h1 className="font-serif text-4xl font-bold text-foreground mb-8">Shopping Cart</h1>
+        <h1 className="font-serif text-4xl font-bold text-foreground mb-8">Giỏ Hàng</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
@@ -171,7 +171,7 @@ export function CartPage() {
                             {formatPrice(item.product.price * item.quantity)}
                           </p>
                           <p className="font-sans text-xs text-muted">
-                            {formatPrice(item.product.price)} each
+                            {formatPrice(item.product.price)} mỗi cái
                           </p>
                         </div>
                       </div>
@@ -192,23 +192,23 @@ export function CartPage() {
           {/* Order Summary */}
           <div>
             <div className="bg-card rounded-lg border border-border p-6 sticky top-24">
-              <h3 className="font-serif font-bold text-lg text-foreground mb-6">Order Summary</h3>
+              <h3 className="font-serif font-bold text-lg text-foreground mb-6">Tóm Tắt Đơn Hàng</h3>
 
               <div className="space-y-4 mb-6 pb-6 border-b border-border">
                 <div className="flex justify-between">
-                  <span className="font-sans text-muted">Subtotal</span>
+                  <span className="font-sans text-muted">Tổng Phụ</span>
                   <span className="font-sans font-semibold">{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-sans text-muted">Shipping</span>
+                  <span className="font-sans text-muted">Vận Chuyển</span>
                   <span className="font-sans font-semibold">
-                    {shipping === 0 ? 'FREE' : formatPrice(shipping)}
+                    {shipping === 0 ? 'MIỄN PHÍ' : formatPrice(shipping)}
                   </span>
                 </div>
               </div>
 
               <div className="flex justify-between mb-6">
-                <span className="font-serif font-bold text-lg">Total</span>
+                <span className="font-serif font-bold text-lg">Tổng Cộng</span>
                 <span className="font-serif font-bold text-primary text-xl">
                   {formatPrice(total)}
                 </span>
@@ -216,7 +216,7 @@ export function CartPage() {
 
               {shipping === 0 && (
                 <p className="font-sans text-xs text-primary bg-primary/10 rounded p-2 mb-4">
-                  Free shipping for orders over ₫5,000,000
+                  Miễn phí vận chuyển cho đơn hàng trên ₫5.000.000
                 </p>
               )}
 
@@ -224,7 +224,7 @@ export function CartPage() {
                 onClick={() => setShowCheckout(true)}
                 className="w-full bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 rounded-lg transition-colors"
               >
-                Proceed to Checkout
+                Tiếp Tục Thanh Toán
               </button>
             </div>
           </div>
@@ -236,7 +236,7 @@ export function CartPage() {
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-card rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-card border-b border-border p-6 flex items-center justify-between">
-              <h2 className="font-serif text-2xl font-bold text-foreground">Checkout</h2>
+              <h2 className="font-serif text-2xl font-bold text-foreground">Thanh Toán</h2>
               <button
                 onClick={() => setShowCheckout(false)}
                 className="p-2 hover:bg-hover rounded transition-colors"
@@ -248,7 +248,7 @@ export function CartPage() {
             <form onSubmit={handleCheckout} className="p-6 space-y-4">
               <div>
                 <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Full Name
+                  Họ Và Tên
                 </label>
                 <input
                   type="text"
@@ -274,7 +274,7 @@ export function CartPage() {
 
               <div>
                 <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Phone Number
+                  Số Điện Thoại
                 </label>
                 <input
                   type="tel"
@@ -287,7 +287,7 @@ export function CartPage() {
 
               <div>
                 <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Address
+                  Địa Chỉ
                 </label>
                 <input
                   type="text"
@@ -300,7 +300,7 @@ export function CartPage() {
 
               <div>
                 <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  City
+                  Thành Phố
                 </label>
                 <input
                   type="text"
@@ -313,7 +313,7 @@ export function CartPage() {
 
               <div>
                 <label className="font-sans text-sm font-semibold text-foreground block mb-2">
-                  Payment Method
+                  Phương Thức Thanh Toán
                 </label>
                 <select
                   value={formData.paymentMethod}
@@ -322,15 +322,15 @@ export function CartPage() {
                   }
                   className="w-full border border-border rounded-lg px-4 py-2 font-sans focus:outline-none focus:border-primary"
                 >
-                  <option value="bank-transfer">Bank Transfer</option>
-                  <option value="credit-card">Credit Card</option>
-                  <option value="cash-on-delivery">Cash on Delivery</option>
+                  <option value="bank-transfer">Chuyển Khoản Ngân Hàng</option>
+                  <option value="credit-card">Thẻ Tín Dụng</option>
+                  <option value="cash-on-delivery">Thanh Toán Khi Nhận Hàng</option>
                 </select>
               </div>
 
               <div className="bg-primary/10 rounded-lg p-4">
                 <p className="font-sans text-sm">
-                  Order Total: <span className="font-bold text-primary">{formatPrice(total)}</span>
+                  Tổng Đơn Hàng: <span className="font-bold text-primary">{formatPrice(total)}</span>
                 </p>
               </div>
 
@@ -338,7 +338,7 @@ export function CartPage() {
                 type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-card font-sans font-bold py-3 rounded-lg transition-colors"
               >
-                Complete Order
+                Hoàn Tất Đơn Hàng
               </button>
             </form>
           </div>

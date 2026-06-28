@@ -16,9 +16,13 @@ export function Header() {
             onClick={() => setCurrentPage('home')}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-card font-serif font-bold text-lg">Y</span>
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Yến Sào Mười Thiết Đào Đào"
+              width={48}
+              height={48}
+              className="h-12 w-12 object-contain"
+            />
             <div className="hidden sm:block">
               <div className="font-serif font-bold text-foreground text-lg">Yến Sào</div>
               <div className="font-sans text-xs text-muted">Mười Thiết Đào Đào</div>
@@ -31,25 +35,25 @@ export function Header() {
               onClick={() => setCurrentPage('home')}
               className="font-serif text-foreground hover:text-primary transition-colors text-sm"
             >
-              Home
+              Trang chủ
             </button>
             <button
               onClick={() => setCurrentPage('shop')}
               className="font-serif text-foreground hover:text-primary transition-colors text-sm"
             >
-              Shop
+              Cửa hàng
             </button>
             <button
               onClick={() => setCurrentPage('about')}
               className="font-serif text-foreground hover:text-primary transition-colors text-sm"
             >
-              About
+              Về chúng tôi
             </button>
             <button
               onClick={() => setCurrentPage('contact')}
               className="font-serif text-foreground hover:text-primary transition-colors text-sm"
             >
-              Contact
+              Liên hệ
             </button>
           </nav>
 
