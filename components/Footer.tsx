@@ -12,7 +12,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Thương hiệu */}
           <div>
-            <h3 className="font-serif font-bold text-lg mb-4" style={{ color: '#c8922a' }}>
+            <h3 className="font-sans font-bold text-lg mb-4" style={{ color: '#c8922a' }}>
               Yến Sào Mười Thiết
             </h3>
             <p className="font-sans text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
@@ -22,7 +22,7 @@ export function Footer() {
 
           {/* Liên kết nhanh */}
           <div>
-            <h4 className="font-serif font-bold mb-4" style={{ color: '#c8922a' }}>Liên Kết Nhanh</h4>
+            <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Liên Kết Nhanh</h4>
             <ul className="space-y-2">
               {[
                 { label: 'Trang Chủ', page: 'home' },
@@ -45,7 +45,7 @@ export function Footer() {
 
           {/* Thông tin */}
           <div>
-            <h4 className="font-serif font-bold mb-4" style={{ color: '#c8922a' }}>Thông Tin</h4>
+            <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Thông Tin</h4>
             <ul className="space-y-2">
               {[
                 'Chính Sách Bảo Mật',
@@ -63,7 +63,7 @@ export function Footer() {
 
           {/* Liên hệ */}
           <div>
-            <h4 className="font-serif font-bold mb-4" style={{ color: '#c8922a' }}>Liên Hệ</h4>
+            <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Liên Hệ</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#c8922a' }} />

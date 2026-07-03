@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/app/context'
 import { formatPrice } from '@/lib/products'
-import { ArrowLeft, CheckCircle, ShoppingCart, Star, Zap } from 'lucide-react'
+import { ArrowLeft, CircleCheck as CheckCircle, ShoppingCart, Star, Zap } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -14,7 +14,7 @@ export function ProductDetailPage() {
   if (!selectedProduct) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#fdf8f3' }}>
-        <p className="font-serif text-2xl" style={{ color: '#1a0a00' }}>Không tìm thấy sản phẩm</p>
+        <p className="font-sans text-2xl" style={{ color: '#1a0a00' }}>Không tìm thấy sản phẩm</p>
       </div>
     )
   }
@@ -63,7 +63,7 @@ export function ProductDetailPage() {
 
           {/* Thông tin sản phẩm */}
           <div>
-            <h1 className="font-serif text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1a0a00' }}>
+            <h1 className="font-sans text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1a0a00' }}>
               {selectedProduct.name}
             </h1>
 
@@ -88,7 +88,7 @@ export function ProductDetailPage() {
 
             {/* Giá */}
             <div className="mb-6 pb-6 border-b" style={{ borderColor: '#e8d5b0' }}>
-              <p className="font-serif text-4xl font-bold" style={{ color: '#c8922a' }}>
+              <p className="font-sans text-4xl font-bold" style={{ color: '#c8922a' }}>
                 {formatPrice(selectedProduct.price)}
               </p>
               <p className="font-sans text-sm mt-2" style={{ color: '#8a6a40' }}>
@@ -157,7 +157,7 @@ export function ProductDetailPage() {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key as 'description' | 'specs')}
-                className="font-serif font-bold pb-4 text-base transition-colors border-b-2"
+                className="font-sans font-bold pb-4 text-base transition-colors border-b-2"
                 style={
                   activeTab === tab.key
                     ? { color: '#c8922a', borderColor: '#c8922a' }
@@ -194,7 +194,7 @@ export function ProductDetailPage() {
 
         {/* Gợi ý xem thêm */}
         <div className="mt-14 rounded-2xl p-8 text-center border" style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
-          <h3 className="font-serif text-2xl font-bold mb-3" style={{ color: '#1a0a00' }}>
+          <h3 className="font-sans text-2xl font-bold mb-3" style={{ color: '#1a0a00' }}>
             Khám Phá Thêm Sản Phẩm
           </h3>
           <p className="font-sans text-sm mb-6" style={{ color: '#8a6a40' }}>

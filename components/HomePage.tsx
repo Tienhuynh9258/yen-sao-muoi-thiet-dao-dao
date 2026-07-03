@@ -163,7 +163,7 @@ export function HomePage() {
             <p className="font-sans text-sm font-semibold tracking-widest uppercase mb-2" style={{ color: '#c8922a' }}>
               Danh Mục
             </p>
-            <h2 className="font-serif text-3xl font-bold" style={{ color: '#1a0a00' }}>
+            <h2 className="font-sans text-3xl font-bold" style={{ color: '#1a0a00' }}>
               Mua Sắm Theo Loại
             </h2>
             <div className="w-16 h-1 mx-auto rounded mt-3" style={{ backgroundColor: '#c8922a' }} />

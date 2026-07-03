@@ -47,7 +47,7 @@ export function CartPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="font-serif text-2xl font-bold mb-2" style={{ color: '#1a0a00' }}>Đặt Hàng Thành Công!</h2>
+          <h2 className="font-sans text-2xl font-bold mb-2" style={{ color: '#1a0a00' }}>Đặt Hàng Thành Công!</h2>
           <p className="font-sans text-sm mb-5" style={{ color: '#8a6a40' }}>
             Cảm ơn bạn đã tin tưởng. Chúng tôi sẽ liên hệ xác nhận đơn hàng sớm nhất.
           </p>
@@ -80,7 +80,7 @@ export function CartPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </div>
-          <h2 className="font-serif text-3xl font-bold mb-2" style={{ color: '#1a0a00' }}>Giỏ hàng trống</h2>
+          <h2 className="font-sans text-3xl font-bold mb-2" style={{ color: '#1a0a00' }}>Giỏ hàng trống</h2>
           <p className="font-sans text-sm mb-8 max-w-xs mx-auto" style={{ color: '#8a6a40' }}>
             Hãy khám phá bộ sưu tập yến sào cao cấp và thêm vào giỏ hàng
           </p>
@@ -109,7 +109,7 @@ export function CartPage() {
           Tiếp Tục Mua Sắm
         </button>
 
-        <h1 className="font-serif text-3xl font-bold mb-8" style={{ color: '#1a0a00' }}>Giỏ Hàng</h1>
+        <h1 className="font-sans text-3xl font-bold mb-8" style={{ color: '#1a0a00' }}>Giỏ Hàng</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Danh sách sản phẩm */}
@@ -130,7 +130,7 @@ export function CartPage() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-serif font-bold mb-1 truncate" style={{ color: '#1a0a00' }}>
+                  <h3 className="font-sans font-bold mb-1 truncate" style={{ color: '#1a0a00' }}>
                     {item.product.name}
                   </h3>
                   <p className="font-sans text-xs mb-3" style={{ color: '#8a6a40' }}>
@@ -159,7 +159,7 @@ export function CartPage() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <p className="font-serif font-bold" style={{ color: '#c8922a' }}>
+                      <p className="font-sans font-bold" style={{ color: '#c8922a' }}>
                         {formatPrice(item.product.price * item.quantity)}
                       </p>
                       <button
@@ -179,7 +179,7 @@ export function CartPage() {
           {/* Tóm tắt đơn hàng */}
           <div>
             <div className="rounded-xl border p-6 sticky top-24" style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
-              <h3 className="font-serif font-bold text-lg mb-5" style={{ color: '#1a0a00' }}>Tóm Tắt Đơn Hàng</h3>
+              <h3 className="font-sans font-bold text-lg mb-5" style={{ color: '#1a0a00' }}>Tóm Tắt Đơn Hàng</h3>
 
               <div className="space-y-3 mb-5 pb-5 border-b" style={{ borderColor: '#e8d5b0' }}>
                 <div className="flex justify-between">
@@ -195,8 +195,8 @@ export function CartPage() {
               </div>
 
               <div className="flex justify-between mb-5">
-                <span className="font-serif font-bold" style={{ color: '#1a0a00' }}>Tổng cộng</span>
-                <span className="font-serif font-bold text-xl" style={{ color: '#c8922a' }}>
+                <span className="font-sans font-bold" style={{ color: '#1a0a00' }}>Tổng cộng</span>
+                <span className="font-sans font-bold text-xl" style={{ color: '#c8922a' }}>
                   {formatPrice(total)}
                 </span>
               </div>
@@ -224,7 +224,7 @@ export function CartPage() {
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
           <div className="rounded-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#ffffff' }}>
             <div className="sticky top-0 border-b p-5 flex items-center justify-between" style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
-              <h2 className="font-serif text-xl font-bold" style={{ color: '#1a0a00' }}>Thông Tin Đặt Hàng</h2>
+              <h2 className="font-sans text-xl font-bold" style={{ color: '#1a0a00' }}>Thông Tin Đặt Hàng</h2>
               <button
                 onClick={() => setShowCheckout(false)}
                 className="p-2 rounded-lg transition-colors hover:bg-gray-100"
@@ -274,7 +274,7 @@ export function CartPage() {
               <div className="rounded-xl p-4" style={{ backgroundColor: '#fdf3e3' }}>
                 <div className="flex justify-between items-center">
                   <span className="font-sans text-sm font-semibold" style={{ color: '#1a0a00' }}>Tổng thanh toán</span>
-                  <span className="font-serif font-bold text-xl" style={{ color: '#c8922a' }}>{formatPrice(total)}</span>
+                  <span className="font-sans font-bold text-xl" style={{ color: '#c8922a' }}>{formatPrice(total)}</span>
                 </div>
               </div>
 
