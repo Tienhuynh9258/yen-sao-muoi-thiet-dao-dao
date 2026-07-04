@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
 
 @import 'tailwindcss';
 @import 'tw-animate-css';
@@ -7,9 +7,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-heading: 'Merriweather', 'Noto Sans', serif;
+  --font-heading: 'Noto Sans', system-ui, sans-serif;
   --font-sans: 'Noto Sans', system-ui, sans-serif;
-  --font-serif: 'Merriweather', 'Noto Sans', serif;
   --font-mono: 'Courier New', monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

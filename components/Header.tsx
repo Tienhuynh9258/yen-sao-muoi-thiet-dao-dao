@@ -2,6 +2,7 @@
 
 import { useAppContext } from '@/app/context'
 import { Menu, ShoppingCart, X } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 export function Header() {
@@ -64,17 +65,21 @@ export function Header() {
               onClick={() => setCurrentPage('home')}
               className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0"
             >
-              <img
+              <Image
                 src="/logo.png"
                 alt="Yến Sào Mười Thiết Đào Đào"
-                className="w-12 h-12 md:w-14 md:h-14 object-contain rounded-full shadow-sm"
+                width={64}
+                height={64}
+                className="h-16 w-16 object-contain"
               />
-              <span
-                className="hidden sm:block text-left font-serif font-bold text-lg md:text-xl"
-                style={{ color: '#8b1a1a' }}
-              >
-                Yến Sào Mười Thiết Đào Đào
-              </span>
+              <div className="hidden sm:block text-left">
+                <div className="font-sans font-bold text-lg leading-tight" style={{ color: '#8b1a1a' }}>
+                  Yến Sào Mười Thiết
+                </div>
+                <div className="font-sans font-semibold text-sm" style={{ color: '#c8922a' }}>
+                  Đào Đào
+                </div>
+              </div>
             </button>
 
             {/* Navigation - desktop */}
