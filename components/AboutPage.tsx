@@ -11,10 +11,10 @@ export function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="mb-16">
-          <h1 style={{ fontFamily: "'Merriweather', serif", color: '#8b1a1a' }} className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 style={{ fontFamily: 'var(--font-sans)', color: '#8b1a1a' }} className="text-5xl md:text-6xl font-bold mb-6">
             Giới Thiệu
           </h1>
-          <p style={{ fontFamily: "'Noto Sans', sans-serif" }} className="text-xl leading-relaxed max-w-3xl" style={{ color: '#4a3728' }}>
+          <p style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="text-xl leading-relaxed max-w-3xl">
             Gần 30 cửa hàng Yến Sào Sài Gòn trên toàn quốc, hơn 20 sản phẩm từ tổ yến chất lượng cao được cung cấp cho hàng triệu khách hàng tin tưởng.
           </p>
         </div>
@@ -23,10 +23,10 @@ export function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           {/* Text Content */}
           <div>
-            <h2 style={{ fontFamily: "'Merriweather', serif" }} className="text-3xl font-bold mb-6" style={{ color: '#1a0a00' }}>
+            <h2 style={{ fontFamily: 'var(--font-sans)', color: '#1a0a00' }} className="text-3xl font-bold mb-6">
               Nhà Máy Sản Xuất Hiện Đại – Nhân Viên Giàu Kinh Nghiệm
             </h2>
-            <div style={{ fontFamily: "'Noto Sans', sans-serif" }} className="space-y-4 text-lg leading-relaxed" style={{ color: '#4a3728' }}>
+            <div style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="space-y-4 text-lg leading-relaxed">
               <p>
                 Với đội ngũ nhân viên tâm huyết, tay nghề cao, giàu kinh nghiệm làm sạch và chế biến tổ yến, cùng với nhà máy chế biến sở hữu thiết bị máy móc công nghệ sản xuất hiện đại, Yến Sào Sài Gòn không ngừng nỗ lực để mang đến cho quý khách hàng những sản phẩm tổ yến tốt nhất với mong muốn nâng cao chất lượng cuộc sống và sức khỏe cho người sử dụng.
               </p>
@@ -51,10 +51,10 @@ export function AboutPage() {
                 <div className="flex items-start gap-4">
                   <item.icon className="w-8 h-8 flex-shrink-0 mt-1" style={{ color: '#c8922a' }} />
                   <div>
-                    <h3 style={{ fontFamily: "'Merriweather', serif" }} className="font-bold text-lg mb-2">
+                    <h3 style={{ fontFamily: 'var(--font-sans)' }} className="font-bold text-lg mb-2">
                       {item.title}
                     </h3>
-                    <p style={{ fontFamily: "'Noto Sans', sans-serif", color: '#8a6a40' }} className="text-sm">
+                    <p style={{ fontFamily: 'var(--font-sans)', color: '#8a6a40' }} className="text-sm">
                       {item.desc}
                     </p>
                   </div>
@@ -66,7 +66,7 @@ export function AboutPage() {
 
         {/* Certificates Section */}
         <div style={{ backgroundColor: '#ffffff' }} className="rounded-lg p-12 border" style={{ borderColor: '#e8d5b0' }}>
-          <h2 style={{ fontFamily: "'Merriweather', serif" }} className="text-3xl font-bold mb-8 text-center" style={{ color: '#1a0a00' }}>
+          <h2 style={{ fontFamily: 'var(--font-sans)', color: '#1a0a00' }} className="text-3xl font-bold mb-8 text-center">
             Chứng Nhận Giải Thưởng
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -83,7 +83,7 @@ export function AboutPage() {
                 style={{ backgroundColor: '#fdf3e3' }}
                 className="p-4 rounded-lg text-center"
               >
-                <p style={{ fontFamily: "'Noto Sans', sans-serif", color: '#4a3728' }} className="text-sm font-semibold">
+                <p style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="text-sm font-semibold">
                   {cert}
                 </p>
               </div>
@@ -94,7 +94,7 @@ export function AboutPage() {
         {/* Message Section */}
         <div className="mt-16 text-center">
           <p
-            style={{ fontFamily: "'Noto Sans', sans-serif", color: '#4a3728' }}
+            style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }}
             className="text-lg leading-relaxed max-w-3xl mx-auto italic"
           >
             Yến Sào Sài Gòn xin gửi tới Quý khách hàng lời cảm ơn chân thành vì đã ủng hộ chúng tôi trong suốt thời gian qua. 

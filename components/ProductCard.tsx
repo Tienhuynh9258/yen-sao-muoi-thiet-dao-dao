@@ -52,7 +52,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="p-4">
         <button
           onClick={handleProductClick}
-          className="block w-full text-left font-serif font-bold text-base mb-2 leading-snug line-clamp-1 hover:underline"
+          className="block w-full text-left font-sans font-bold text-base mb-2 leading-snug line-clamp-1 hover:underline"
           style={{ color: '#1a0a00' }}
         >
           {product.name}
@@ -78,7 +78,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Giá */}
-        <p className="font-serif font-bold text-lg mb-4" style={{ color: '#c8922a' }}>
+        <p className="font-sans font-bold text-lg mb-4" style={{ color: '#c8922a' }}>
           {formatPrice(product.price)}
         </p>
 

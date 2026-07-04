@@ -73,10 +73,10 @@ export function Header() {
                 className="h-16 w-16 object-contain"
               />
               <div className="hidden sm:block text-left">
-                <div className="font-serif font-bold text-lg leading-tight" style={{ color: '#8b1a1a' }}>
+                <div className="font-sans font-bold text-lg leading-tight" style={{ color: '#8b1a1a' }}>
                   Yến Sào Mười Thiết
                 </div>
-                <div className="font-serif font-semibold text-sm" style={{ color: '#c8922a' }}>
+                <div className="font-sans font-semibold text-sm" style={{ color: '#c8922a' }}>
                   Đào Đào
                 </div>
               </div>

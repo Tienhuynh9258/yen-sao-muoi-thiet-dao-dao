@@ -2,7 +2,7 @@
 
 import { useAppContext } from '@/app/context'
 import { categories, products } from '@/lib/products'
-import { Filter } from 'lucide-react'
+import { ListFilter as Filter } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { ProductCard } from './ProductCard'
 
@@ -39,7 +39,7 @@ export function ShopPage() {
       {/* Banner đầu trang */}
       <div style={{ backgroundColor: '#8b1a1a' }} className="py-10 px-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="font-serif text-3xl md:text-4xl font-bold text-white mb-2">
+          <h1 className="font-sans text-3xl md:text-4xl font-bold text-white mb-2">
             Cửa Hàng Yến Sào
           </h1>
           <p className="font-sans text-white/75 text-sm">
@@ -64,7 +64,7 @@ export function ShopPage() {
             <div className={`${showFilters ? 'block' : 'hidden'} lg:block rounded-xl p-5 border`} style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}>
               {/* Danh mục */}
               <div className="mb-7">
-                <h3 className="font-serif font-bold mb-3" style={{ color: '#1a0a00' }}>Danh Mục</h3>
+                <h3 className="font-sans font-bold mb-3" style={{ color: '#1a0a00' }}>Danh Mục</h3>
                 <div className="space-y-1">
                   {[{ value: '', label: 'Tất Cả Sản Phẩm' }, ...categories.map((c) => ({ value: c, label: c }))].map((opt) => (
                     <button
@@ -85,7 +85,7 @@ export function ShopPage() {
 
               {/* Sắp xếp */}
               <div>
-                <h3 className="font-serif font-bold mb-3" style={{ color: '#1a0a00' }}>Sắp Xếp Theo</h3>
+                <h3 className="font-sans font-bold mb-3" style={{ color: '#1a0a00' }}>Sắp Xếp Theo</h3>
                 <div className="space-y-1">
                   {[
                     { value: 'price-low', label: 'Giá: Thấp đến Cao' },
@@ -132,7 +132,7 @@ export function ShopPage() {
               </>
             ) : (
               <div className="text-center py-20">
-                <p className="font-serif text-2xl font-bold mb-2" style={{ color: '#1a0a00' }}>Không tìm thấy sản phẩm</p>
+                <p className="font-sans text-2xl font-bold mb-2" style={{ color: '#1a0a00' }}>Không tìm thấy sản phẩm</p>
                 <p className="font-sans text-sm" style={{ color: '#8a6a40' }}>
                   Hãy thử điều chỉnh bộ lọc của bạn
                 </p>
