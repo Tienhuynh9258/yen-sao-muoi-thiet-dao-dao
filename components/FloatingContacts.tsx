@@ -7,7 +7,7 @@ const ZALO_ICON_URL =
 const MESSENGER_ICON_URL =
   'https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg'
 
-interface FloatingButtonProps {
+interface PillButtonProps {
   href: string
   label: string
   backgroundColor: string
@@ -16,23 +16,21 @@ interface FloatingButtonProps {
   children: React.ReactNode
 }
 
-function FloatingButton({
+function PillButton({
   href,
   label,
   backgroundColor,
   rippleColor,
   external,
   children,
-}: FloatingButtonProps) {
+}: PillButtonProps) {
   return (
     <a
       href={href}
       aria-label={label}
       title={label}
-      {...(external
-        ? { target: '_blank', rel: 'noopener noreferrer' }
-        : {})}
-      className="group relative block"
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      className="group relative inline-flex"
     >
       <span
         aria-hidden
@@ -40,7 +38,7 @@ function FloatingButton({
         style={{ backgroundColor: rippleColor }}
       />
       <span
-        className="relative flex items-center justify-center w-14 h-14 rounded-full border-2 border-white shadow-xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105"
+        className="relative inline-flex items-center gap-2 rounded-full border-2 border-white px-4 py-2 shadow-xl transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-0.5"
         style={{ backgroundColor }}
       >
         {children}
@@ -51,48 +49,63 @@ function FloatingButton({
 
 export function FloatingContacts() {
   return (
-    <div className="fixed z-50 bottom-6 right-4 sm:right-6 flex flex-col items-end gap-4">
-      <FloatingButton
-        href="https://zalo.me/0123456789"
-        label="Chat Zalo"
-        backgroundColor="#0068ff"
-        rippleColor="rgba(0,104,255,0.45)"
-        external
-      >
-        <img
-          src={ZALO_ICON_URL}
-          alt="Zalo"
-          className="w-8 h-8 object-contain animate-float-shake"
-          loading="eager"
-        />
-      </FloatingButton>
+    <>
+      {/* Hotline - Bottom Left */}
+      <div className="fixed z-50 bottom-6 left-4 sm:left-6">
+        <PillButton
+          href="tel:0362658888"
+          label="Gọi hotline 0362 658 888"
+          backgroundColor="#10b981"
+          rippleColor="rgba(16,185,129,0.45)"
+        >
+          <Phone
+            className="w-6 h-6 text-white animate-float-shake"
+            strokeWidth={2.5}
+          />
+          <span className="text-sm font-bold text-white whitespace-nowrap">
+            0362 658 888
+          </span>
+        </PillButton>
+      </div>
 
-      <FloatingButton
-        href="https://m.me/yensaosaigon"
-        label="Chat Messenger"
-        backgroundColor="#0084ff"
-        rippleColor="rgba(0,132,255,0.45)"
-        external
-      >
-        <img
-          src={MESSENGER_ICON_URL}
-          alt="Messenger"
-          className="w-8 h-8 object-contain animate-float-shake"
-          loading="eager"
-        />
-      </FloatingButton>
+      {/* Zalo + Messenger - Bottom Right */}
+      <div className="fixed z-50 bottom-6 right-4 sm:right-6 flex flex-col items-end gap-4">
+        <PillButton
+          href="https://zalo.me/0123456789"
+          label="Chat Zalo"
+          backgroundColor="#0068ff"
+          rippleColor="rgba(0,104,255,0.45)"
+          external
+        >
+          <img
+            src={ZALO_ICON_URL}
+            alt="Zalo"
+            className="w-8 h-8 object-contain animate-float-shake"
+            loading="eager"
+          />
+          <span className="text-sm font-bold text-white whitespace-nowrap">
+            Chat Zalo
+          </span>
+        </PillButton>
 
-      <FloatingButton
-        href="tel:0362658888"
-        label="Gọi hotline 0362 658 888"
-        backgroundColor="#10b981"
-        rippleColor="rgba(16,185,129,0.45)"
-      >
-        <Phone
-          className="w-6 h-6 text-white animate-float-shake"
-          strokeWidth={2.5}
-        />
-      </FloatingButton>
-    </div>
+        <PillButton
+          href="https://m.me/yensaosaigon"
+          label="Chat Messenger"
+          backgroundColor="#0084ff"
+          rippleColor="rgba(0,132,255,0.45)"
+          external
+        >
+          <img
+            src={MESSENGER_ICON_URL}
+            alt="Messenger"
+            className="w-8 h-8 object-contain animate-float-shake"
+            loading="eager"
+          />
+          <span className="text-sm font-bold text-white whitespace-nowrap">
+            Messenger
+          </span>
+        </PillButton>
+      </div>
+    </>
   )
 }
