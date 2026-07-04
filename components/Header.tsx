@@ -65,7 +65,7 @@ export function Header() {
               className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0"
             >
               <img
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Yến Sào Mười Thiết Đào Đào"
                 className="w-12 h-12 md:w-14 md:h-14 object-contain rounded-full shadow-sm"
               />
