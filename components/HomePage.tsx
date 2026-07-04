@@ -31,24 +31,27 @@ export function HomePage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="font-sans text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: '#c8922a' }}>
+          {/* Đã sửa lại toàn bộ cú pháp JSX chuẩn ở đây */}
+          <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+            <p className="font-sans text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: 'rgb(200, 146, 42)' }}>
               Thương Hiệu Yến Sào Uy Tín
             </p>
             <h1 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight text-balance">
-              Yến Sào Mười Thiết<br />
-              <span style={{ color: '#f0c060' }}>Đào Đào</span>
+              Yến Sào Mười Thiết<br /><span style={{ color: 'rgb(240, 192, 96)' }}>Đào Đào</span>
             </h1>
             <p className="font-sans text-base md:text-lg text-white/85 mb-8 leading-relaxed max-w-xl">
               Sản phẩm yến sào cao cấp 100% nguyên chất, thu hoạch tự nhiên — bổ dưỡng cho cả gia đình.
             </p>
-            <button
+            <button 
               onClick={() => setCurrentPage('shop')}
-              className="inline-flex items-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105"
-              style={{ backgroundColor: '#c8922a', color: '#ffffff' }}
+              className="inline-flex items-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105" 
+              style={{ backgroundColor: 'rgb(200, 146, 42)', color: 'rgb(255, 255, 255)' }}
             >
               Xem Sản Phẩm
-              <ArrowRight className="w-5 h-5" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right w-5 h-5" aria-hidden="true">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
             </button>
           </div>
         </div>

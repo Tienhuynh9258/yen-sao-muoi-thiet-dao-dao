@@ -10,25 +10,21 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Yến Sào Mười Thiết Đào Đào - Premium Bird\'s Nest',
-  description: 'Premium bird\'s nest products - authentic Vietnamese heritage and luxury',
+  title: 'Yến Sào Mười Thiết Đào Đào',
+  description: 'Bird\'s nest products - authentic Vietnamese heritage and luxury',
   generator: 'v0.app',
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/logo_transparent.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/logo_transparent.png',
         media: '(prefers-color-scheme: dark)',
       },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
     ],
-    apple: '/apple-icon.png',
+    apple: '/logo_transparent.png',
   },
 }
 
