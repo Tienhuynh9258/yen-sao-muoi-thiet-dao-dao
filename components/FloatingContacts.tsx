@@ -1,64 +1,98 @@
 'use client'
 
-import Image from 'next/image'
+import { Phone } from 'lucide-react'
+
+const ZALO_ICON_URL =
+  'https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg'
+const MESSENGER_ICON_URL =
+  'https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg'
+
+interface FloatingButtonProps {
+  href: string
+  label: string
+  backgroundColor: string
+  rippleColor: string
+  external?: boolean
+  children: React.ReactNode
+}
+
+function FloatingButton({
+  href,
+  label,
+  backgroundColor,
+  rippleColor,
+  external,
+  children,
+}: FloatingButtonProps) {
+  return (
+    <a
+      href={href}
+      aria-label={label}
+      title={label}
+      {...(external
+        ? { target: '_blank', rel: 'noopener noreferrer' }
+        : {})}
+      className="group relative block"
+    >
+      <span
+        aria-hidden
+        className="absolute inset-0 rounded-full animate-float-ripple"
+        style={{ backgroundColor: rippleColor }}
+      />
+      <span
+        className="relative flex items-center justify-center w-14 h-14 rounded-full border-2 border-white shadow-xl transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105"
+        style={{ backgroundColor }}
+      >
+        {children}
+      </span>
+    </a>
+  )
+}
 
 export function FloatingContacts() {
   return (
-    <>
-      {/* Phone Button - Left Bottom */}
-      <a
-        href="tel:0362658888"
-        className="fixed bottom-8 left-6 z-40 group"
-        title="Gọi ngay"
+    <div className="fixed z-50 bottom-6 right-4 sm:right-6 flex flex-col items-end gap-4">
+      <FloatingButton
+        href="https://zalo.me/0123456789"
+        label="Chat Zalo"
+        backgroundColor="#0068ff"
+        rippleColor="rgba(0,104,255,0.45)"
+        external
       >
-        <div className="flex items-center gap-3 px-5 py-3 rounded-full text-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-          style={{ backgroundColor: '#25d366' }}>
-          <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
-          </svg>
-          <span className="font-medium text-sm">0362 658 888</span>
-        </div>
-      </a>
+        <img
+          src={ZALO_ICON_URL}
+          alt="Zalo"
+          className="w-8 h-8 object-contain animate-float-shake"
+          loading="eager"
+        />
+      </FloatingButton>
 
-      {/* Messenger Button - Right Bottom */}
-      <a
+      <FloatingButton
         href="https://m.me/yensaosaigon"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-8 right-6 z-40"
-        title="Chat Messenger"
+        label="Chat Messenger"
+        backgroundColor="#0084ff"
+        rippleColor="rgba(0,132,255,0.45)"
+        external
       >
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full text-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-          style={{ backgroundColor: '#0084ff' }}>
-          <Image
-            src="/messenger-icon.png"
-            alt="Messenger"
-            width={40}
-            height={40}
-            className="w-10 h-10 object-contain"
-          />
-        </div>
-      </a>
+        <img
+          src={MESSENGER_ICON_URL}
+          alt="Messenger"
+          className="w-8 h-8 object-contain animate-float-shake"
+          loading="eager"
+        />
+      </FloatingButton>
 
-      {/* Zalo Button - Right Middle */}
-      <a
-        href="https://zalo.me"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-32 right-6 z-40"
-        title="Chat Zalo"
+      <FloatingButton
+        href="tel:0362658888"
+        label="Gọi hotline 0362 658 888"
+        backgroundColor="#10b981"
+        rippleColor="rgba(16,185,129,0.45)"
       >
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full text-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-          style={{ backgroundColor: '#0068ff' }}>
-          <Image
-            src="/zalo-icon.png"
-            alt="Zalo"
-            width={40}
-            height={40}
-            className="w-10 h-10 object-contain"
-          />
-        </div>
-      </a>
-    </>
+        <Phone
+          className="w-6 h-6 text-white animate-float-shake"
+          strokeWidth={2.5}
+        />
+      </FloatingButton>
+    </div>
   )
 }
