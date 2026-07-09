@@ -15,7 +15,7 @@ export function AboutPage() {
             Giới Thiệu
           </h1>
           <p style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="text-xl leading-relaxed max-w-3xl">
-            Gần 30 cửa hàng Yến Sào Sài Gòn trên toàn quốc, hơn 20 sản phẩm từ tổ yến chất lượng cao được cung cấp cho hàng triệu khách hàng tin tưởng.
+            Yến Sào Thiên Nhiên Mười Thiết – Đào Đào – giữ trọn tinh hoa tổ yến quê nhà Gò Công.
           </p>
         </div>
 
@@ -24,14 +24,17 @@ export function AboutPage() {
           {/* Text Content */}
           <div>
             <h2 style={{ fontFamily: 'var(--font-sans)', color: '#1a0a00' }} className="text-3xl font-bold mb-6">
-              Nhà Máy Sản Xuất Hiện Đại – Nhân Viên Giàu Kinh Nghiệm
+              Câu Chuyện Khởi Nguồn Từ Tình Yêu Yến Sào
             </h2>
             <div style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="space-y-4 text-lg leading-relaxed">
               <p>
-                Với đội ngũ nhân viên tâm huyết, tay nghề cao, giàu kinh nghiệm làm sạch và chế biến tổ yến, cùng với nhà máy chế biến sở hữu thiết bị máy móc công nghệ sản xuất hiện đại, Yến Sào Sài Gòn không ngừng nỗ lực để mang đến cho quý khách hàng những sản phẩm tổ yến tốt nhất với mong muốn nâng cao chất lượng cuộc sống và sức khỏe cho người sử dụng.
+                Câu chuyện của Yến sào thiên nhiên Mười Thiết bắt đầu từ một cái duyên rất tự nhiên vào khoảng năm 1988, khi những đàn chim yến bay về làm tổ trong chính ngôi nhà của gia đình tôi tại Gò Công. Từ khoảnh khắc giản dị đó, nghề nuôi và khai thác yến sào đã trở thành một phần gắn bó sâu sắc với gia đình suốt hơn 30 năm qua.
               </p>
               <p>
-                Hãy đến với Yến Sào Sài Gòn để trải nghiệm chất lượng và đẳng cấp của tổ yến nguyên chất. Chúng tôi cam kết đem lại sự hài lòng tuyệt đối cho khách hàng, là địa chỉ mua yến sào tin cậy số 1 Việt Nam.
+                Trải qua thời gian, nghề yến không chỉ là sinh kế mà còn là sự gìn giữ một giá trị truyền thống, được truyền lại qua nhiều thế hệ. Đây cũng là hành trình đã được ghi lại trong một phóng sự thực hiện tại Gò Công, phản ánh một phần chặng đường lao động bền bỉ và tâm huyết ấy.
+              </p>
+              <p>
+                Với mong muốn phát triển và đưa sản phẩm đến gần hơn với nhiều khách hàng, các thành viên trong gia đình tiếp tục mở rộng và xây dựng thương hiệu. Từ đó, Yến Sào Mười Thiết – Đào Đào ra đời, mang theo định hướng nâng cao chất lượng, đa dạng sản phẩm và mở rộng thị trường nhưng vẫn giữ nguyên giá trị cốt lõi: yến sạch – yến thật – yến làm bằng tâm huyết.
               </p>
             </div>
           </div>
@@ -65,7 +68,7 @@ export function AboutPage() {
         </div>
 
         {/* Certificates Section */}
-        <div style={{ backgroundColor: '#ffffff' }} className="rounded-lg p-12 border" style={{ borderColor: '#e8d5b0' }}>
+        <div style={{ backgroundColor: '#ffffff' ,  borderColor: '#e8d5b0' }} className="rounded-lg p-12 border" >
           <h2 style={{ fontFamily: 'var(--font-sans)', color: '#1a0a00' }} className="text-3xl font-bold mb-8 text-center">
             Chứng Nhận Giải Thưởng
           </h2>

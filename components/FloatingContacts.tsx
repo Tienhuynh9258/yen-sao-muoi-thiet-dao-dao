@@ -53,8 +53,8 @@ export function FloatingContacts() {
       {/* Hotline - Bottom Left */}
       <div className="fixed z-50 bottom-6 left-4 sm:left-6">
         <PillButton
-          href="tel:0362658888"
-          label="Gọi hotline 0362 658 888"
+          href="tel:0938013789"
+          label="Gọi hotline 0938 013 789"
           backgroundColor="#10b981"
           rippleColor="rgba(16,185,129,0.45)"
         >
@@ -63,7 +63,7 @@ export function FloatingContacts() {
             strokeWidth={2.5}
           />
           <span className="text-sm font-bold text-white whitespace-nowrap">
-            0362 658 888
+            0938 013 789
           </span>
         </PillButton>
       </div>
@@ -71,7 +71,7 @@ export function FloatingContacts() {
       {/* Zalo + Messenger - Bottom Right */}
       <div className="fixed z-50 bottom-6 right-4 sm:right-6 flex flex-col items-end gap-4">
         <PillButton
-          href="https://zalo.me/0123456789"
+          href="https://zalo.me/0938013789"
           label="Chat Zalo"
           backgroundColor="#0068ff"
           rippleColor="rgba(0,104,255,0.45)"

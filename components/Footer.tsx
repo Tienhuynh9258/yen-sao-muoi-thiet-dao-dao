@@ -13,7 +13,7 @@ export function Footer() {
           {/* Thương hiệu */}
           <div>
             <h3 className="font-sans font-bold text-lg mb-4" style={{ color: '#c8922a' }}>
-              Yến Sào Mười Thiết
+              Yến Sào Mười Thiết Đào Đào
             </h3>
             <p className="font-sans text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
               Sản phẩm yến sào cao cấp của Việt Nam. Di sản xác thực, chất lượng hàng đầu.
@@ -67,15 +67,15 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#c8922a' }} />
-                <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>0123.456.789</span>
+                <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>0938.013.789</span>
               </div>
               <div className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#c8922a' }} />
-                <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>info@yensaomuoithiet.com</span>
+                <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>yensaomuoithiet.daodao@gmail.com</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#c8922a' }} />
-                <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>TP. Hồ Chí Minh, Việt Nam</span>
+                <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>Tỉnh Đồng Tháp, Việt Nam</span>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export function Footer() {
 
         <div className="border-t pt-8" style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
           <p className="font-sans text-sm text-center" style={{ color: 'rgba(255,255,255,0.5)' }}>
-            © 2024 Yến Sào Mười Thiết Đào Đào. Bảo lưu mọi quyền.
+            © 2026 Yến Sào Mười Thiết Đào Đào. Bảo lưu mọi quyền.
           </p>
         </div>
       </div>
