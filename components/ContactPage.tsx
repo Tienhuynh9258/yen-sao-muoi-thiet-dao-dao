@@ -28,20 +28,20 @@ export function ContactPage() {
             Liên Hệ
           </h1>
           <p style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="text-xl leading-relaxed max-w-3xl">
-            Công ty TNHH Yến Sào Sài Gòn ra đời với mục đích đem đến những sản phẩm tổ yến cao cấp nguyên chất được khai thác trực tiếp từ các nhà yến của Công ty.
+            Sản xuất và phân phối: Yến Sào Thiên Nhiên Mười Thiết - Đào Đào
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Contact Info */}
           <div>
-            <h2 style={{ fontFamily: 'var(--font-sans)' }} className="text-3xl font-bold mb-8" style={{ color: '#1a0a00' }}>
+            <h2 style={{ fontFamily: 'var(--font-sans)' ,  color: '#1a0a00' }} className="text-3xl font-bold mb-8" >
               Thông Tin Liên Hệ
             </h2>
 
             {/* Headquarters */}
-            <div style={{ backgroundColor: '#ffffff' }} className="rounded-lg p-6 mb-6 border" style={{ borderColor: '#e8d5b0' }}>
-              <h3 style={{ fontFamily: 'var(--font-sans)' }} className="font-bold text-lg mb-4" style={{ color: '#8b1a1a' }}>
+            <div style={{ backgroundColor: '#ffffff' ,  borderColor: '#e8d5b0' }} className="rounded-lg p-6 mb-6 border" >
+              <h3 style={{ fontFamily: 'var(--font-sans)' ,  color: '#8b1a1a' }} className="font-bold text-lg mb-4" >
                 Trụ Sở Chính
               </h3>
               <div className="space-y-4">
@@ -49,21 +49,10 @@ export function ContactPage() {
                   <MapPin className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#c8922a' }} />
                   <div>
                     <p style={{ fontFamily: 'var(--font-sans)' }} className="font-semibold mb-1">
-                      Hà Nội
+                      Gò Công, Đồng Tháp, Việt Nam
                     </p>
                     <p style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="text-sm">
-                      426 Đường Láng, Láng Hạ, Đống Đa, Hà Nội
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <MapPin className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#c8922a' }} />
-                  <div>
-                    <p style={{ fontFamily: 'var(--font-sans)' }} className="font-semibold mb-1">
-                      Thành Phố Hồ Chí Minh
-                    </p>
-                    <p style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }} className="text-sm">
-                      267 Điện Biên Phủ, P. Võ Thị Sáu, Quận 3, TP. HCM
+                      142 Trần Công Tường, Phường Gò Công, Đồng Tháp, Việt Nam
                     </p>
                   </div>
                 </div>
@@ -71,63 +60,45 @@ export function ContactPage() {
             </div>
 
             {/* Hotlines */}
-            <div style={{ backgroundColor: '#ffffff' }} className="rounded-lg p-6 mb-6 border" style={{ borderColor: '#e8d5b0' }}>
-              <h3 style={{ fontFamily: 'var(--font-sans)' }} className="font-bold text-lg mb-4" style={{ color: '#8b1a1a' }}>
+            <div style={{ backgroundColor: '#ffffff' ,  borderColor: '#e8d5b0' }} className="rounded-lg p-6 mb-6 border" >
+              <h3 style={{ fontFamily: 'var(--font-sans)' ,  color: '#8b1a1a' }} className="font-bold text-lg mb-4" >
                 Hotline
               </h3>
               <div className="space-y-3">
                 <a
-                  href="tel:0362658888"
+                  href="tel:0938013789"
                   className="flex items-center gap-3 hover:opacity-80 transition-opacity"
                 >
                   <Phone className="w-5 h-5" style={{ color: '#c8922a' }} />
                   <span style={{ fontFamily: 'var(--font-sans)' }} className="text-lg font-semibold">
-                    0362 658 888
+                    093 801 3789
                   </span>
                 </a>
                 <a
-                  href="tel:0246258888"
+                  href="tel:0918035869"
                   className="flex items-center gap-3 hover:opacity-80 transition-opacity"
                 >
                   <Phone className="w-5 h-5" style={{ color: '#c8922a' }} />
                   <span style={{ fontFamily: 'var(--font-sans)' }} className="text-lg font-semibold">
-                    0246 258 888
-                  </span>
-                </a>
-                <a
-                  href="tel:0286258888"
-                  className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-                >
-                  <Phone className="w-5 h-5" style={{ color: '#c8922a' }} />
-                  <span style={{ fontFamily: 'var(--font-sans)' }} className="text-lg font-semibold">
-                    0286 258 888
+                    091 803 5869
                   </span>
                 </a>
               </div>
             </div>
 
             {/* Email */}
-            <div style={{ backgroundColor: '#ffffff' }} className="rounded-lg p-6 border" style={{ borderColor: '#e8d5b0' }}>
-              <h3 style={{ fontFamily: 'var(--font-sans)' }} className="font-bold text-lg mb-4" style={{ color: '#8b1a1a' }}>
+            <div style={{ backgroundColor: '#ffffff' ,  borderColor: '#e8d5b0' }} className="rounded-lg p-6 border" >
+              <h3 style={{ fontFamily: 'var(--font-sans)' ,  color: '#8b1a1a' }} className="font-bold text-lg mb-4" >
                 Email
               </h3>
               <div className="space-y-2">
                 <a
-                  href="mailto:support@yensaosaigon.com"
+                  href="mailto:yensaomuoithiet.daodao@gmail.com"
                   className="flex items-center gap-3 hover:opacity-80 transition-opacity"
                 >
                   <Mail className="w-5 h-5" style={{ color: '#c8922a' }} />
                   <span style={{ fontFamily: 'var(--font-sans)' }} className="text-sm">
-                    support@yensaosaigon.com
-                  </span>
-                </a>
-                <a
-                  href="mailto:yensaosg8888@gmail.com"
-                  className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-                >
-                  <Mail className="w-5 h-5" style={{ color: '#c8922a' }} />
-                  <span style={{ fontFamily: 'var(--font-sans)' }} className="text-sm">
-                    yensaosg8888@gmail.com
+                    yensaomuoithiet.daodao@gmail.com
                   </span>
                 </a>
               </div>
@@ -136,15 +107,13 @@ export function ContactPage() {
 
           {/* Contact Form */}
           <div>
-            <h2 style={{ fontFamily: 'var(--font-sans)' }} className="text-3xl font-bold mb-8" style={{ color: '#1a0a00' }}>
+            <h2 style={{ fontFamily: 'var(--font-sans)' ,  color: '#1a0a00' }} className="text-3xl font-bold mb-8" >
               Gửi Thông Tin Liên Lạc
             </h2>
             <form
               onSubmit={handleSubmit}
-              style={{ backgroundColor: '#ffffff' }}
-              className="rounded-lg p-8 border"
-              style={{ borderColor: '#e8d5b0' }}
-            >
+              style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}
+              className="rounded-lg p-8 border">
               <div className="mb-6">
                 <label style={{ fontFamily: 'var(--font-sans)' }} className="block font-semibold mb-2">
                   Tên của bạn
@@ -156,7 +125,6 @@ export function ContactPage() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   style={{ borderColor: '#e8d5b0', fontFamily: 'var(--font-sans)' }}
                   className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2"
-                  style={{ '--tw-ring-color': '#c8922a' } as any}
                   placeholder="Nhập tên của bạn"
                 />
               </div>

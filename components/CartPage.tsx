@@ -57,7 +57,7 @@ export function CartPage() {
             </p>
           </div>
           <a
-            href="https://zalo.me/0123456789"
+            href="https://zalo.me/0938013789"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-sans font-bold py-2.5 px-6 rounded-lg text-white"
