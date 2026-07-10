@@ -4,10 +4,11 @@ import { useAppContext } from '@/app/context'
 import { formatPrice } from '@/lib/products'
 import { ArrowLeft, Minus, Plus, Trash2, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export function CartPage() {
-  const { cartItems, updateCartQuantity, removeFromCart, setCurrentPage, clearCart } = useAppContext()
+  const { cartItems, updateCartQuantity, removeFromCart, clearCart } = useAppContext()
   const [showCheckout, setShowCheckout] = useState(false)
   const [checkoutSuccess, setCheckoutSuccess] = useState(false)
   const [formData, setFormData] = useState({
@@ -30,7 +31,6 @@ export function CartPage() {
     setTimeout(() => {
       setShowCheckout(false)
       setCheckoutSuccess(false)
-      setCurrentPage('home')
     }, 4000)
   }
 
@@ -84,14 +84,14 @@ export function CartPage() {
           <p className="font-sans text-sm mb-8 max-w-xs mx-auto" style={{ color: '#8a6a40' }}>
             Hãy khám phá bộ sưu tập yến sào cao cấp và thêm vào giỏ hàng
           </p>
-          <button
-            onClick={() => setCurrentPage('shop')}
+          <Link
+            href="/product"
             className="inline-flex items-center gap-2 font-sans font-bold py-3 px-8 rounded-lg text-white transition-all hover:opacity-90"
             style={{ backgroundColor: '#c8922a' }}
           >
             <ArrowLeft className="w-5 h-5" />
             Tiếp Tục Mua Sắm
-          </button>
+          </Link>
         </div>
       </main>
     )
@@ -100,14 +100,14 @@ export function CartPage() {
   return (
     <main style={{ backgroundColor: '#fdf8f3' }} className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <button
-          onClick={() => setCurrentPage('shop')}
-          className="flex items-center gap-2 font-sans font-semibold mb-6 transition-colors hover:underline"
+        <Link
+          href="/product"
+          className="inline-flex items-center gap-2 font-sans font-semibold mb-6 transition-colors hover:underline"
           style={{ color: '#c8922a' }}
         >
           <ArrowLeft className="w-5 h-5" />
           Tiếp Tục Mua Sắm
-        </button>
+        </Link>
 
         <h1 className="font-sans text-3xl font-bold mb-8" style={{ color: '#1a0a00' }}>Giỏ Hàng</h1>
 

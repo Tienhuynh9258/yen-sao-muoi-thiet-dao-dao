@@ -78,3 +78,20 @@ export function formatPrice(price: number): string {
     minimumFractionDigits: 0,
   }).format(price)
 }
+
+const cleanName = (name: string) =>
+  name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+
+export function getSlug(name: string): string {
+  return cleanName(name)
+}
+
+export function findProductBySlug(slug: string): Product | undefined {
+  return products.find((p) => getSlug(p.name) === slug)
+}

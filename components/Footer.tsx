@@ -1,10 +1,33 @@
 'use client'
 
-import { useAppContext } from '@/app/context'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { Phone, MapPin, Mail } from 'lucide-react'
+import Link from 'next/link'
+
+const ZALO_ICON_URL =
+  'https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg'
+const FB_ICON_URL =
+  'https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg'
 
 export function Footer() {
-  const { setCurrentPage } = useAppContext()
+  const navLinks = [
+    { label: 'Trang chủ', href: '/' },
+    { label: 'Cửa hàng', href: '/product' },
+    { label: 'Giới thiệu', href: '/about' },
+    { label: 'Liên hệ', href: '/contact' },
+  ] as const
+
+  const socialLinks = [
+    {
+      icon: FB_ICON_URL,
+      href: 'https://www.facebook.com/share/1BLqoquDQi/?mibextid=wwXIfr',
+      label: 'Facebook',
+    },
+    {
+      icon: ZALO_ICON_URL,
+      href: 'https://zalo.me/0938013789',
+      label: 'Zalo',
+    },
+  ] as const
 
   return (
     <footer style={{ backgroundColor: '#1a0a00', color: '#ffffff' }} className="mt-16">
@@ -24,41 +47,42 @@ export function Footer() {
           <div>
             <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Liên Kết Nhanh</h4>
             <ul className="space-y-2">
-              {[
-                { label: 'Trang Chủ', page: 'home' },
-                { label: 'Cửa Hàng', page: 'shop' },
-                { label: 'Giới Thiệu', page: 'about' },
-                { label: 'Liên Hệ', page: 'contact' },
-              ].map((link) => (
-                <li key={link.page}>
-                  <button
-                    onClick={() => setCurrentPage(link.page as 'home' | 'shop' | 'about' | 'contact')}
-                    className="font-sans text-sm transition-colors hover:underline"
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-sans text-sm hover:text-yellow-300 transition-colors"
                     style={{ color: 'rgba(255,255,255,0.75)' }}
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Thông tin */}
+          {/* Theo dõi */}
           <div>
-            <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Thông Tin</h4>
-            <ul className="space-y-2">
-              {[
-                'Chính Sách Bảo Mật',
-                'Điều Khoản Dịch Vụ',
-                'Chính Sách Đổi Trả',
-              ].map((item) => (
-                <li key={item}>
-                  <a href="#" className="font-sans text-sm transition-colors hover:underline" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                    {item}
-                  </a>
-                </li>
+            <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Theo Dõi</h4>
+            <div className="flex gap-4">
+              {socialLinks.map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-80 transition-opacity flex items-center"
+                  aria-label={social.label}
+                >
+                  <img
+                    src={social.icon}
+                    alt={social.label}
+                    className="w-5 h-5 object-contain"
+                    loading="lazy"
+                  />
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* Liên hệ */}
