@@ -1,12 +1,17 @@
 'use client'
 
+import type { Product } from '@/app/context'
 import { useAppContext } from '@/app/context'
-import { categories, products } from '@/lib/products'
+import { categories } from '@/lib/products'
 import { ListFilter as Filter } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { ProductCard } from './ProductCard'
 
-export function ShopPage() {
+interface ShopPageProps {
+  products: Product[]
+}
+
+export function ShopPage({ products }: ShopPageProps) {
   const { categoryFilter, setCategoryFilter, sortBy, setSortBy } = useAppContext()
   const [showFilters, setShowFilters] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -19,14 +24,14 @@ export function ShopPage() {
 
   let filteredProducts = products
   if (categoryFilter) {
-    filteredProducts = filteredProducts.filter((p) => p.category === categoryFilter)
+    filteredProducts = filteredProducts.filter((p: Product) => p.category === categoryFilter)
   }
   if (sortBy === 'price-low') {
-    filteredProducts = [...filteredProducts].sort((a, b) => a.price - b.price)
+    filteredProducts = [...filteredProducts].sort((a: Product, b: Product) => a.price - b.price)
   } else if (sortBy === 'price-high') {
-    filteredProducts = [...filteredProducts].sort((a, b) => b.price - a.price)
+    filteredProducts = [...filteredProducts].sort((a: Product, b: Product) => b.price - a.price)
   } else if (sortBy === 'rating') {
-    filteredProducts = [...filteredProducts].sort((a, b) => b.rating - a.rating)
+    filteredProducts = [...filteredProducts].sort((a: Product, b: Product) => b.rating - a.rating)
   }
 
   const filterBtnClass = (active: boolean) =>
