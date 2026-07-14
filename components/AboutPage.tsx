@@ -1,7 +1,6 @@
 'use client'
 
-import { ArrowLeft, Award, Users, Factory } from 'lucide-react'
-import Link from 'next/link'
+import { Award, Users, Factory } from 'lucide-react'
 
 export function AboutPage() {
   return (
@@ -94,10 +93,6 @@ export function AboutPage() {
 
         {/* Message Section */}
         <div className="mt-16 text-center">
-          <Link href="/" className="inline-flex items-center gap-2 font-semibold transition-colors hover:underline mb-6" style={{ color: '#c8922a' }}>
-            <ArrowLeft className="w-5 h-5" />
-            Trang Chủ
-          </Link>
           <p
             style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }}
             className="text-lg leading-relaxed max-w-3xl mx-auto italic"
