@@ -102,7 +102,7 @@ export function AboutPage() {
             style={{ fontFamily: 'var(--font-sans)', color: '#4a3728' }}
             className="text-lg leading-relaxed max-w-3xl mx-auto italic"
           >
-            Yến Sào Sài Gòn xin gửi tới Quý khách hàng lời cảm ơn chân thành vì đã ủng hộ chúng tôi trong suốt thời gian qua.
+            Yến Sào Mười Thiết Đào Đào xin gửi tới Quý khách hàng lời cảm ơn chân thành vì đã ủng hộ chúng tôi trong suốt thời gian qua.
             <br />
             Kính chúc quý khách và gia đình có một sức khỏe dồi, tận hưởng niềm vui an nhiên bên những người thân yêu!
           </p>

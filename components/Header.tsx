@@ -43,15 +43,21 @@ export function Header() {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://www.facebook.com/share/1BLqoquDQi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-yellow-300 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
+            <a href="https://www.facebook.com/share/1BLqoquDQi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:opacity-80 transition-opacity">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+                alt="Facebook"
+                className="w-5 h-5 object-contain"
+                loading="lazy"
+              />
             </a>
-            <a href="https://zalo.me/0938013789" target="_blank" rel="noopener noreferrer" aria-label="Zalo" className="hover:text-yellow-300 transition-colors">
-              <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
-                <span style={{ color: '#0068ff' }} className="font-extrabold text-[8px] leading-none">Zalo</span>
-              </div>
+            <a href="https://zalo.me/0938013789" target="_blank" rel="noopener noreferrer" aria-label="Zalo" className="hover:opacity-80 transition-opacity">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+                alt="Zalo"
+                className="w-5 h-5 object-contain"
+                loading="lazy"
+              />
             </a>
           </div>
         </div>
