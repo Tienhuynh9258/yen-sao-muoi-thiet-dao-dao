@@ -1,7 +1,7 @@
-import { supabase } from '@/lib/db'
+import { getSupabase } from '@/lib/db'
 
 export async function GET() {
-  const { data, error } = await supabase.from('products').select('*')
+  const { data, error } = await getSupabase().from('products').select('*')
 
   if (error) {
     return Response.json({ error: error.message }, { status: 500 })

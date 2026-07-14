@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '@/lib/db'
+import { getSupabaseAdmin } from '@/lib/db'
 import { verifyAdminSession } from '@/lib/auth'
 import { NextRequest } from 'next/server'
 
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest, { params }: Params) {
   }
 
   const { id } = await params
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from('products')
     .select('*')
     .eq('id', id)
@@ -36,7 +36,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
 
   try {
     const body = await request.json()
-    const { data, error } = await supabaseAdmin
+    const { data, error } = await getSupabaseAdmin()
       .from('products')
       .update(body)
       .eq('id', id)
@@ -60,7 +60,7 @@ export async function DELETE(request: NextRequest, { params }: Params) {
 
   const { id } = await params
 
-  const { error } = await supabaseAdmin.from('products').delete().eq('id', id)
+  const { error } = await getSupabaseAdmin().from('products').delete().eq('id', id)
 
   if (error) {
     return Response.json({ error: error.message }, { status: 500 })

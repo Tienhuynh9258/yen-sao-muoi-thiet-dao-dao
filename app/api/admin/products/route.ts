@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '@/lib/db'
+import { getSupabaseAdmin } from '@/lib/db'
 import { verifyAdminSession } from '@/lib/auth'
 
 export async function GET() {
@@ -7,7 +7,7 @@ export async function GET() {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from('products')
     .select('*')
     .order('created_at', { ascending: false })
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { data, error } = await supabaseAdmin.from('products').insert([body]).select()
+    const { data, error } = await getSupabaseAdmin().from('products').insert([body]).select()
 
     if (error) {
       return Response.json({ error: error.message }, { status: 500 })

@@ -1,5 +1,5 @@
 import type { Product } from '@/app/context'
-import { supabase } from './db'
+import { getSupabase } from './db'
 
 export const categories = ['Premium', 'Luxury', 'Standard']
 
@@ -25,7 +25,7 @@ export function getSlug(name: string): string {
 }
 
 export async function getAllProducts(): Promise<Product[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from('products')
     .select('*')
     .order('created_at', { ascending: false })
@@ -35,49 +35,37 @@ export async function getAllProducts(): Promise<Product[]> {
     return []
   }
 
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    name: row.name,
-    image: row.image,
-    description: row.description,
-    price: row.price,
-    category: row.category,
-    rating: row.rating,
-    reviews: row.reviews,
-    specs: row.specs ?? [],
-  }))
+  return (data ?? []).map((row) => rowToProduct(row))
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  // We fetch all and filter client-side (PostgREST doesn't have regex on normalized strings easily)
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-
+  const { data, error } = await getSupabase().from('products').select('*')
   if (error || !data) {
     console.error('getProductBySlug error:', error)
     return null
   }
-
   const found = data.find((p) => getSlug(p.name) === slug)
   if (!found) return null
-
-  return {
-    id: found.id,
-    name: found.name,
-    image: found.image,
-    description: found.description,
-    price: found.price,
-    category: found.category,
-    rating: found.rating,
-    reviews: found.reviews,
-    specs: found.specs ?? [],
-  }
+  return rowToProduct(found)
 }
 
-// Generate static params helper (used in build-time for ISR)
 export async function getProductSlugs(): Promise<string[]> {
-  const { data, error } = await supabase.from('products').select('name')
+  const { data, error } = await getSupabase().from('products').select('name')
   if (error || !data) return []
   return data.map((p) => getSlug(p.name))
+}
+
+// Helper to convert Supabase row to Product
+function rowToProduct(row: Record<string, unknown>): Product {
+  return {
+    id: String(row.id ?? ''),
+    name: String(row.name ?? ''),
+    image: String(row.image ?? ''),
+    description: String(row.description ?? ''),
+    price: Number(row.price ?? 0),
+    category: String(row.category ?? ''),
+    rating: Number(row.rating ?? 0),
+    reviews: Number(row.reviews ?? 0),
+    specs: Array.isArray(row.specs) ? row.specs.map(String) : [],
+  }
 }
