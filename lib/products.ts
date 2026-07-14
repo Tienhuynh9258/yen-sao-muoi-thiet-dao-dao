@@ -24,8 +24,11 @@ export function getSlug(name: string): string {
   return cleanName(name)
 }
 
+// Returns null during build if env vars are missing — safe for SSG/ISR
 export async function getAllProducts(): Promise<Product[]> {
-  const { data, error } = await getSupabase()
+  const client = getSupabase()
+  if (!client) return []
+  const { data, error } = await client
     .from('products')
     .select('*')
     .order('created_at', { ascending: false })
@@ -39,23 +42,26 @@ export async function getAllProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const { data, error } = await getSupabase().from('products').select('*')
+  const client = getSupabase()
+  if (!client) return null
+  const { data, error } = await client.from('products').select('*')
   if (error || !data) {
     console.error('getProductBySlug error:', error)
     return null
   }
-  const found = data.find((p) => getSlug(p.name) === slug)
+  const found = data.find((p: { name: string }) => getSlug(p.name) === slug)
   if (!found) return null
   return rowToProduct(found)
 }
 
 export async function getProductSlugs(): Promise<string[]> {
-  const { data, error } = await getSupabase().from('products').select('name')
+  const client = getSupabase()
+  if (!client) return []
+  const { data, error } = await client.from('products').select('name')
   if (error || !data) return []
-  return data.map((p) => getSlug(p.name))
+  return data.map((p: { name: string }) => getSlug(p.name))
 }
 
-// Helper to convert Supabase row to Product
 function rowToProduct(row: Record<string, unknown>): Product {
   return {
     id: String(row.id ?? ''),

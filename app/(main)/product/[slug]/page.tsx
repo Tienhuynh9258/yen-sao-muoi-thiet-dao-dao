@@ -1,4 +1,4 @@
-import { getProductBySlug, getProductSlugs } from '@/lib/products'
+import { getProductBySlug } from '@/lib/products'
 import { ProductDetailPage } from '@/components/ProductDetailPage'
 
 interface ProductDetailProps {
@@ -18,9 +18,4 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
   }
 
   return <ProductDetailPage product={product} />
-}
-
-export async function generateStaticParams() {
-  const slugs = await getProductSlugs()
-  return slugs.map((slug) => ({ slug }))
 }
