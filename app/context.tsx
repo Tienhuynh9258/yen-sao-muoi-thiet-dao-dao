@@ -48,8 +48,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     return []
   })
-  const [categoryFilter, setCategoryFilter] = useState('Tất cả')
-  const [sortBy, setSortBy] = useState<'price-low' | 'price-high' | 'rating'>('rating')
+  const [categoryFilter, setCategoryFilter] = useState('')
+  const [sortBy, setSortBy] = useState<'price-low' | 'price-high' | 'rating'>('price-low')
 
   const addToCart = (product: Product) => {
     setCartItems(prev => {

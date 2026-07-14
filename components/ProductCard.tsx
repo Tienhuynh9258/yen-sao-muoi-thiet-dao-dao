@@ -2,7 +2,7 @@
 
 import type { Product } from '@/app/context'
 import { useAppContext } from '@/app/context'
-import { getSlug } from '@/lib/products'
+import { formatPrice, getSlug } from '@/lib/products'
 import { ShoppingCart, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -57,27 +57,37 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Đánh giá */}
         <div className="flex items-center gap-1 mb-3">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`} style={{ color: i < Math.floor(product.rating) ? '#c8922a' : '#d1c0a8' }} />
-          ))}
+          <div className="flex">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className="w-3.5 h-3.5"
+                style={{
+                  fill: i < Math.floor(product.rating) ? '#c8922a' : 'transparent',
+                  color: i < Math.floor(product.rating) ? '#c8922a' : '#d1c0a8',
+                }}
+              />
+            ))}
+          </div>
           <span className="font-sans text-xs ml-1" style={{ color: '#8a6a40' }}>
             ({product.reviews})
           </span>
         </div>
 
-        <div className="flex items-center justify-between">
-          <span className="font-sans font-bold text-sm" style={{ color: '#c8922a' }}>
-            {product.price.toLocaleString('vi-VN')} ₫
-          </span>
-          <button
-            onClick={handleAddToCart}
-            className="p-2 rounded-lg transition-all hover:opacity-90"
-            style={{ backgroundColor: '#8b1a1a', color: '#ffffff' }}
-            aria-label="Thêm vào giỏ"
-          >
-            <ShoppingCart className="w-4 h-4" />
-          </button>
-        </div>
+        {/* Giá */}
+        <p className="font-sans font-bold text-lg mb-4" style={{ color: '#c8922a' }}>
+          {formatPrice(product.price)}
+        </p>
+
+        {/* Nút thêm giỏ */}
+        <button
+          onClick={handleAddToCart}
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg font-sans font-semibold text-sm text-white transition-all hover:opacity-90"
+          style={{ backgroundColor: '#8b1a1a' }}
+        >
+          <ShoppingCart className="w-4 h-4" />
+          Thêm Vào Giỏ
+        </button>
       </div>
     </div>
   )
