@@ -12,7 +12,7 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
   if (!product) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <p className="font-sans text-2xl">Không tìm thấy sản phẩm</p>
+        <p className="font-sans text-2xl">Khong tim thay san pham</p>
       </main>
     )
   }

@@ -1,6 +1,7 @@
 import { getSupabaseAdmin } from '@/lib/db'
 import { verifyAdminSession } from '@/lib/auth'
 import { NextRequest } from 'next/server'
+import { revalidatePath } from 'next/cache'
 
 interface Params {
   params: Promise<{ id: string }>
@@ -13,7 +14,11 @@ export async function GET(request: NextRequest, { params }: Params) {
   }
 
   const { id } = await params
-  const { data, error } = await getSupabaseAdmin()
+  const admin = getSupabaseAdmin()
+  if (!admin) {
+    return Response.json({ error: 'Database not configured' }, { status: 500 })
+  }
+  const { data, error } = await admin
     .from('products')
     .select('*')
     .eq('id', id)
@@ -36,7 +41,11 @@ export async function PUT(request: NextRequest, { params }: Params) {
 
   try {
     const body = await request.json()
-    const { data, error } = await getSupabaseAdmin()
+    const admin = getSupabaseAdmin()
+    if (!admin) {
+      return Response.json({ error: 'Database not configured' }, { status: 500 })
+    }
+    const { data, error } = await admin
       .from('products')
       .update(body)
       .eq('id', id)
@@ -45,6 +54,10 @@ export async function PUT(request: NextRequest, { params }: Params) {
     if (error) {
       return Response.json({ error: error.message }, { status: 500 })
     }
+
+    revalidatePath('/')
+    revalidatePath('/product/')
+    revalidatePath('/cart')
 
     return Response.json({ product: data?.[0] })
   } catch {
@@ -60,11 +73,18 @@ export async function DELETE(request: NextRequest, { params }: Params) {
 
   const { id } = await params
 
-  const { error } = await getSupabaseAdmin().from('products').delete().eq('id', id)
+  const admin = getSupabaseAdmin()
+  if (!admin) {
+    return Response.json({ error: 'Database not configured' }, { status: 500 })
+  }
+  const { error } = await admin.from('products').delete().eq('id', id)
 
   if (error) {
     return Response.json({ error: error.message }, { status: 500 })
   }
+
+  revalidatePath('/')
+  revalidatePath('/product/')
 
   return Response.json({ success: true })
 }

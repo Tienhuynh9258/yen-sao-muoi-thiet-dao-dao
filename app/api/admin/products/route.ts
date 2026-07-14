@@ -1,5 +1,6 @@
-import { getSupabaseAdmin } from '@/lib/db'
 import { verifyAdminSession } from '@/lib/auth'
+import { getSupabaseAdmin } from '@/lib/db'
+import { revalidatePath } from 'next/cache'
 
 export async function GET() {
   const isAdmin = await verifyAdminSession()
@@ -7,7 +8,12 @@ export async function GET() {
     return Response.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { data, error } = await getSupabaseAdmin()
+  const admin = getSupabaseAdmin()
+  if (!admin) {
+    return Response.json({ error: 'Database not configured' }, { status: 500 })
+  }
+
+  const { data, error } = await admin
     .from('products')
     .select('*')
     .order('created_at', { ascending: false })
@@ -27,11 +33,19 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { data, error } = await getSupabaseAdmin().from('products').insert([body]).select()
+    const admin = getSupabaseAdmin()
+    if (!admin) {
+      return Response.json({ error: 'Database not configured' }, { status: 500 })
+    }
+    const { data, error } = await admin.from('products').insert([body]).select()
 
     if (error) {
       return Response.json({ error: error.message }, { status: 500 })
     }
+
+    revalidatePath('/')
+    revalidatePath('/product/')
+    revalidatePath('/cart')
 
     return Response.json({ product: data?.[0] })
   } catch {
