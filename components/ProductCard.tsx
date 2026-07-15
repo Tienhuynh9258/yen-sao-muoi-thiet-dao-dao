@@ -2,21 +2,18 @@
 
 import type { Product } from '@/app/context'
 import { useAppContext } from '@/app/context'
-import { formatPrice } from '@/lib/products'
+import { formatPrice, getSlug } from '@/lib/products'
 import { ShoppingCart, Star } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface ProductCardProps {
   product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { setCurrentPage, setSelectedProduct, addToCart } = useAppContext()
-
-  const handleProductClick = () => {
-    setSelectedProduct(product)
-    setCurrentPage('product-detail')
-  }
+  const { addToCart } = useAppContext()
+  const slug = getSlug(product.name)
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -29,8 +26,8 @@ export function ProductCard({ product }: ProductCardProps) {
       style={{ backgroundColor: '#ffffff', borderColor: '#e8d5b0' }}
     >
       {/* Hình ảnh */}
-      <button
-        onClick={handleProductClick}
+      <Link
+        href={`/product/${slug}`}
         className="relative w-full aspect-square overflow-hidden group cursor-pointer block"
         style={{ backgroundColor: '#fdf3e3' }}
       >
@@ -46,17 +43,17 @@ export function ProductCard({ product }: ProductCardProps) {
         >
           {product.category}
         </div>
-      </button>
+      </Link>
 
       {/* Nội dung */}
       <div className="p-4">
-        <button
-          onClick={handleProductClick}
+        <Link
+          href={`/product/${slug}`}
           className="block w-full text-left font-sans font-bold text-base mb-2 leading-snug line-clamp-1 hover:underline"
           style={{ color: '#1a0a00' }}
         >
           {product.name}
-        </button>
+        </Link>
 
         {/* Đánh giá */}
         <div className="flex items-center gap-1 mb-3">

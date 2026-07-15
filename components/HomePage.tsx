@@ -4,11 +4,11 @@ import { useAppContext } from '@/app/context'
 import { products } from '@/lib/products'
 import { ArrowRight, Award, Leaf, Sparkles } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { ProductCard } from './ProductCard'
 
 export function HomePage() {
-  const { setCurrentPage } = useAppContext()
   const { ref: valueRef, isVisible: valueVisible } = useIntersectionObserver()
   const { ref: productsRef, isVisible: productsVisible } = useIntersectionObserver()
   const { ref: categoryRef, isVisible: categoryVisible } = useIntersectionObserver()
@@ -42,9 +42,9 @@ export function HomePage() {
             <p className="font-sans text-base md:text-lg text-white/85 mb-8 leading-relaxed max-w-xl">
               Sản phẩm yến sào cao cấp 100% nguyên chất, thu hoạch tự nhiên — bổ dưỡng cho cả gia đình.
             </p>
-            <button 
-              onClick={() => setCurrentPage('shop')}
-              className="inline-flex items-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105" 
+            <Link
+              href="/product"
+              className="inline-flex items-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105"
               style={{ backgroundColor: 'rgb(200, 146, 42)', color: 'rgb(255, 255, 255)' }}
             >
               Xem Sản Phẩm
@@ -52,13 +52,13 @@ export function HomePage() {
                 <path d="M5 12h14"></path>
                 <path d="m12 5 7 7-7 7"></path>
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Value Propositions */}
-      <section 
+      <section
         ref={valueRef}
         className="py-14 px-4 sm:px-6 lg:px-8 bg-white"
         style={{
@@ -105,7 +105,7 @@ export function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section 
+      <section
         ref={productsRef}
         className="py-14 px-4 sm:px-6 lg:px-8"
         style={{
@@ -132,8 +132,8 @@ export function HomePage() {
           </div>
 
           <div className="w-full flex justify-center mt-10">
-            <button
-              onClick={() => setCurrentPage('shop')}
+            <Link
+              href="/product"
               className="inline-flex items-center gap-2 border-2 font-sans font-bold py-3 px-8 rounded-lg transition-all hover:text-white"
               style={{ borderColor: '#8b1a1a', color: '#8b1a1a' }}
               onMouseEnter={(e) => {
@@ -147,13 +147,13 @@ export function HomePage() {
             >
               Xem Tất Cả Sản Phẩm
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Danh mục */}
-      <section 
+      <section
         ref={categoryRef}
         className="py-14 px-4 sm:px-6 lg:px-8 bg-white"
         style={{
@@ -178,17 +178,17 @@ export function HomePage() {
               { name: 'Yến Cao Cấp', bg: '#fff8ee', border: '#c8922a', desc: 'Loại A+ chọn lọc kỹ lưỡng' },
               { name: 'Yến Sang Trọng', bg: '#fff0f0', border: '#8b1a1a', desc: 'Tinh hoa tuyệt đỉnh — hảo hạng nhất' },
             ].map((cat) => (
-              <button
+              <Link
                 key={cat.name}
-                onClick={() => setCurrentPage('shop')}
-                className="rounded-xl p-8 text-center transition-all hover:shadow-lg border-2"
+                href="/product"
+                className="rounded-xl p-8 text-center transition-all hover:shadow-lg border-2 block"
                 style={{ backgroundColor: cat.bg, borderColor: cat.border }}
               >
                 <h3 className="font-sans font-bold text-xl mb-2" style={{ color: '#1a0a00' }}>
                   {cat.name}
                 </h3>
                 <p className="font-sans text-sm" style={{ color: '#8a6a40' }}>{cat.desc}</p>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -218,10 +218,10 @@ export function HomePage() {
               href="https://zalo.me/0938013789"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 font-bold py-3 px-8 rounded-lg border-2 border-white transition-all hover:scale-105"
-              style={{ color: '#ffffff' }}
+              className="inline-flex items-center justify-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105"
+              style={{ backgroundColor: '#0068ff', color: '#ffffff' }}
             >
-              Chat Zalo
+              Nhắn Tin Zalo
             </a>
           </div>
         </div>

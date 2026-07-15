@@ -1,11 +1,14 @@
 'use client'
 
-import { useAppContext } from '@/app/context'
 import { Mail, MapPin, Phone } from 'lucide-react'
+import Link from 'next/link'
+
+const ZALO_ICON_URL =
+  'https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg'
+const FB_ICON_URL =
+  'https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg'
 
 export function Footer() {
-  const { setCurrentPage } = useAppContext()
-
   return (
     <footer style={{ backgroundColor: '#1a0a00', color: '#ffffff' }} className="mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -24,22 +27,26 @@ export function Footer() {
           <div>
             <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Liên Kết Nhanh</h4>
             <ul className="space-y-2">
-              {[
-                { label: 'Trang Chủ', page: 'home' },
-                { label: 'Cửa Hàng', page: 'shop' },
-                { label: 'Giới Thiệu', page: 'about' },
-                { label: 'Liên Hệ', page: 'contact' },
-              ].map((link) => (
-                <li key={link.page}>
-                  <button
-                    onClick={() => setCurrentPage(link.page as 'home' | 'shop' | 'about' | 'contact')}
-                    className="font-sans text-sm transition-colors hover:underline"
-                    style={{ color: 'rgba(255,255,255,0.75)' }}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
+              <li>
+                <Link href="/" className="font-sans text-sm transition-colors hover:underline" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  Trang Chủ
+                </Link>
+              </li>
+              <li>
+                <Link href="/product" className="font-sans text-sm transition-colors hover:underline" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  Cửa Hàng
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="font-sans text-sm transition-colors hover:underline" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  Giới Thiệu
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="font-sans text-sm transition-colors hover:underline" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  Liên Hệ
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -64,7 +71,7 @@ export function Footer() {
           {/* Liên hệ */}
           <div>
             <h4 className="font-sans font-bold mb-4" style={{ color: '#c8922a' }}>Liên Hệ</h4>
-            <div className="space-y-3">
+            <div className="space-y-3 mb-4">
               <div className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#c8922a' }} />
                 <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>0938.013.789</span>
@@ -77,6 +84,14 @@ export function Footer() {
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: '#c8922a' }} />
                 <span className="font-sans text-sm" style={{ color: 'rgba(255,255,255,0.75)' }}>Tỉnh Đồng Tháp, Việt Nam</span>
               </div>
+            </div>
+            <div className="flex gap-3">
+              <a href="https://www.facebook.com/share/1BLqoquDQi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <img src={FB_ICON_URL} alt="Facebook" className="w-5 h-5 object-contain" />
+              </a>
+              <a href="https://zalo.me/0938013789" target="_blank" rel="noopener noreferrer" aria-label="Zalo">
+                <img src={ZALO_ICON_URL} alt="Zalo" className="w-5 h-5 object-contain" />
+              </a>
             </div>
           </div>
         </div>

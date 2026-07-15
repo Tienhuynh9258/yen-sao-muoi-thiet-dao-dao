@@ -1,43 +1,43 @@
 'use client'
 
+import type { Product } from '@/app/context'
 import { useAppContext } from '@/app/context'
-import { formatPrice } from '@/lib/products'
+import { formatPrice, getSlug } from '@/lib/products'
 import { ArrowLeft, CircleCheck as CheckCircle, ShoppingCart, Star, Zap } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export function ProductDetailPage() {
-  const { selectedProduct, setCurrentPage, addToCart } = useAppContext()
+interface ProductDetailPageProps {
+  product: Product
+}
+
+export function ProductDetailPage({ product }: ProductDetailPageProps) {
+  const { addToCart } = useAppContext()
+  const router = useRouter()
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<'description' | 'specs'>('description')
 
-  if (!selectedProduct) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#fdf8f3' }}>
-        <p className="font-sans text-2xl" style={{ color: '#1a0a00' }}>Không tìm thấy sản phẩm</p>
-      </div>
-    )
-  }
-
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
-      addToCart(selectedProduct)
+      addToCart(product)
     }
-    setCurrentPage('cart')
+    router.push('/cart')
   }
 
   return (
     <main style={{ backgroundColor: '#fdf8f3' }} className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Nút quay lại */}
-        <button
-          onClick={() => setCurrentPage('shop')}
-          className="flex items-center gap-2 font-sans font-semibold mb-8 transition-colors hover:underline"
+        <Link
+          href="/product"
+          className="inline-flex items-center gap-2 font-sans font-semibold mb-8 transition-colors hover:underline"
           style={{ color: '#c8922a' }}
         >
           <ArrowLeft className="w-5 h-5" />
           Quay Lại Cửa Hàng
-        </button>
+        </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Hình ảnh */}
@@ -47,8 +47,8 @@ export function ProductDetailPage() {
               style={{ backgroundColor: '#fdf3e3' }}
             >
               <Image
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
+                src={product.image}
+                alt={product.name}
                 fill
                 className="object-cover"
               />
@@ -56,7 +56,7 @@ export function ProductDetailPage() {
                 className="absolute top-4 left-4 px-4 py-1.5 rounded-full font-sans font-bold text-sm text-white"
                 style={{ backgroundColor: '#c8922a' }}
               >
-                {selectedProduct.category}
+                {product.category}
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ export function ProductDetailPage() {
           {/* Thông tin sản phẩm */}
           <div>
             <h1 className="font-sans text-3xl md:text-4xl font-bold mb-3" style={{ color: '#1a0a00' }}>
-              {selectedProduct.name}
+              {product.name}
             </h1>
 
             {/* Đánh giá */}
@@ -75,21 +75,21 @@ export function ProductDetailPage() {
                     key={i}
                     className="w-5 h-5"
                     style={{
-                      fill: i < Math.floor(selectedProduct.rating) ? '#c8922a' : 'transparent',
-                      color: i < Math.floor(selectedProduct.rating) ? '#c8922a' : '#d1c0a8',
+                      fill: i < Math.floor(product.rating) ? '#c8922a' : 'transparent',
+                      color: i < Math.floor(product.rating) ? '#c8922a' : '#d1c0a8',
                     }}
                   />
                 ))}
               </div>
               <span className="font-sans text-sm" style={{ color: '#8a6a40' }}>
-                {selectedProduct.rating} — {selectedProduct.reviews} đánh giá
+                {product.rating} — {product.reviews} đánh giá
               </span>
             </div>
 
             {/* Giá */}
             <div className="mb-6 pb-6 border-b" style={{ borderColor: '#e8d5b0' }}>
               <p className="font-sans text-4xl font-bold" style={{ color: '#c8922a' }}>
-                {formatPrice(selectedProduct.price)}
+                {formatPrice(product.price)}
               </p>
               <p className="font-sans text-sm mt-2" style={{ color: '#8a6a40' }}>
                 Miễn phí vận chuyển cho đơn hàng trên 5.000.000 ₫
@@ -98,7 +98,7 @@ export function ProductDetailPage() {
 
             {/* Mô tả ngắn */}
             <p className="font-sans leading-relaxed mb-6" style={{ color: '#1a0a00' }}>
-              {selectedProduct.description}
+              {product.description}
             </p>
 
             {/* Số lượng & Thêm giỏ */}
@@ -172,7 +172,7 @@ export function ProductDetailPage() {
           {activeTab === 'description' && (
             <div className="max-w-3xl space-y-4">
               <p className="font-sans leading-relaxed" style={{ color: '#1a0a00' }}>
-                {selectedProduct.description}
+                {product.description}
               </p>
               <p className="font-sans leading-relaxed" style={{ color: '#1a0a00' }}>
                 Mỗi sản phẩm được lựa chọn cẩn thận và xử lý để duy trì các tiêu chuẩn cao nhất về độ tinh khiết. Yến sào của chúng tôi không chứa chất bảo quản, không pha trộn — hoàn toàn tự nhiên từ tổ yến thật sự.
@@ -180,9 +180,9 @@ export function ProductDetailPage() {
             </div>
           )}
 
-          {activeTab === 'specs' && selectedProduct.specs && (
+          {activeTab === 'specs' && product.specs && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
-              {selectedProduct.specs.map((spec, index) => (
+              {product.specs.map((spec, index) => (
                 <div key={index} className="flex items-center gap-3 py-3 border-b" style={{ borderColor: '#e8d5b0' }}>
                   <CheckCircle className="w-5 h-5 flex-shrink-0" style={{ color: '#c8922a' }} />
                   <span className="font-sans text-sm" style={{ color: '#1a0a00' }}>{spec}</span>
@@ -200,13 +200,13 @@ export function ProductDetailPage() {
           <p className="font-sans text-sm mb-6" style={{ color: '#8a6a40' }}>
             Còn nhiều lựa chọn yến sào cao cấp đang chờ bạn
           </p>
-          <button
-            onClick={() => setCurrentPage('shop')}
+          <Link
+            href="/product"
             className="inline-flex items-center gap-2 font-sans font-bold py-3 px-8 rounded-lg text-white transition-all hover:opacity-90"
             style={{ backgroundColor: '#c8922a' }}
           >
             Xem Tất Cả Sản Phẩm
-          </button>
+          </Link>
         </div>
       </div>
     </main>

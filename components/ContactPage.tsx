@@ -1,11 +1,10 @@
 'use client'
 
 import { ArrowLeft, MapPin, Phone, Mail } from 'lucide-react'
-import { useAppContext } from '@/app/context'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export function ContactPage() {
-  const { setCurrentPage } = useAppContext()
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -86,8 +85,8 @@ export function ContactPage() {
               </div>
             </div>
 
-            {/* Email */}
-            <div style={{ backgroundColor: '#ffffff' ,  borderColor: '#e8d5b0' }} className="rounded-lg p-6 border" >
+            {/* Emails */}
+            <div style={{ backgroundColor: '#ffffff' ,  borderColor: '#e8d5b0' }} className="rounded-lg p-6 mb-6 border" >
               <h3 style={{ fontFamily: 'var(--font-sans)' ,  color: '#8b1a1a' }} className="font-bold text-lg mb-4" >
                 Email
               </h3>
@@ -159,29 +158,73 @@ export function ContactPage() {
                 />
               </div>
 
-              <div className="mb-8">
+              <div className="mb-6">
                 <label style={{ fontFamily: 'var(--font-sans)' }} className="block font-semibold mb-2">
-                  Nội Dung
+                  Tin Nhắn
                 </label>
                 <textarea
-                  required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   style={{ borderColor: '#e8d5b0', fontFamily: 'var(--font-sans)' }}
-                  className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 resize-none"
-                  rows={5}
-                  placeholder="Nhập nội dung liên hệ"
+                  className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 min-h-[150px]"
+                  placeholder="Nhập nội dung tin nhắn"
                 />
               </div>
 
               <button
                 type="submit"
-                style={{ backgroundColor: '#c8922a' }}
-                className="w-full text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity"
+                className="w-full font-sans font-bold py-3 rounded-lg text-white transition-all hover:opacity-90"
+                style={{ backgroundColor: '#8b1a1a' }}
               >
-                Gửi Liên Hệ
+                Gửi Tin Nhắn
               </button>
             </form>
+          </div>
+        </div>
+
+        {/* Map Section */}
+        <div className="mb-16">
+          <h2 style={{ fontFamily: 'var(--font-sans)', color: '#1a0a00' }} className="text-3xl font-bold mb-8">
+            Bản Đồ
+          </h2>
+          <div className="w-full h-96 rounded-xl overflow-hidden border" style={{ borderColor: '#e8d5b0' }}>
+            <iframe
+              title="Yến Sào Mười Thiết Đào Đào"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.017373223776!2d106.66679465853627!3d10.400019865235958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31eb5c5f5f5f5f5f%3A0x5f5f5f5f5f5f5f5f!2sG%C3%B2%20C%C3%B4ng%2C%20Ti%E1%BB%81n%20Giang%2C%20Vi%E1%BB%87t%20Nam!5e0!3m2!1svi!2s!4v1600000000000!5m2!1svi!2s"
+              className="w-full h-full border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div style={{ backgroundColor: '#1a0a00' }} className="rounded-3xl p-10 text-center">
+          <h2 style={{ fontFamily: 'var(--font-sans)', color: '#c8922a' }} className="text-3xl font-bold mb-4">
+            Đặt Hàng Trực Tiếp
+          </h2>
+          <p style={{ fontFamily: 'var(--font-sans)', color: '#fdf3e3' }} className="mb-8 max-w-2xl mx-auto">
+            Liên hệ ngay để được tư vấn miễn phí về sản phẩm yến sào phù hợp với nhu cầu của bạn.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="tel:0938013789"
+              className="inline-flex items-center justify-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105"
+              style={{ backgroundColor: '#c8922a', color: '#ffffff' }}
+            >
+              <Phone className="w-5 h-5" />
+              Gọi Ngay: 0938.013.789
+            </a>
+            <a
+              href="https://zalo.me/0938013789"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 font-bold py-3 px-8 rounded-lg transition-all hover:scale-105"
+              style={{ backgroundColor: '#0068ff', color: '#ffffff' }}
+            >
+              Nhắn Tin Zalo
+            </a>
           </div>
         </div>
       </div>

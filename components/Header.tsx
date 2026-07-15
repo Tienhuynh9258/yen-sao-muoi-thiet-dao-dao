@@ -3,17 +3,18 @@
 import { useAppContext } from '@/app/context'
 import { Menu, ShoppingCart, X } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export function Header() {
-  const { setCurrentPage, cartItems } = useAppContext()
+  const { cartItems } = useAppContext()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const navLinks = [
-    { label: 'Trang chủ', page: 'home' },
-    { label: 'Sản phẩm', page: 'shop' },
-    { label: 'Giới thiệu', page: 'about' },
-    { label: 'Liên hệ', page: 'contact' },
+    { label: 'Trang chủ', href: '/' },
+    { label: 'Sản phẩm', href: '/product' },
+    { label: 'Giới thiệu', href: '/about' },
+    { label: 'Liên hệ', href: '/contact' },
   ] as const
 
   return (
@@ -42,15 +43,21 @@ export function Header() {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-yellow-300 transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
+            <a href="https://www.facebook.com/share/1BLqoquDQi/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:opacity-80 transition-opacity">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+                alt="Facebook"
+                className="w-5 h-5 object-contain"
+                loading="lazy"
+              />
             </a>
-            <a href="https://zalo.me" target="_blank" rel="noopener noreferrer" aria-label="Zalo" className="hover:text-yellow-300 transition-colors">
-              <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center">
-                <span style={{ color: '#0068ff' }} className="font-extrabold text-[8px] leading-none">Zalo</span>
-              </div>
+            <a href="https://zalo.me/0938013789" target="_blank" rel="noopener noreferrer" aria-label="Zalo" className="hover:opacity-80 transition-opacity">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+                alt="Zalo"
+                className="w-5 h-5 object-contain"
+                loading="lazy"
+              />
             </a>
           </div>
         </div>
@@ -61,10 +68,7 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <button
-              onClick={() => setCurrentPage('home')}
-              className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0"
-            >
+            <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="Yến Sào Mười Thiết Đào Đào"
@@ -80,14 +84,14 @@ export function Header() {
                   Đào Đào
                 </div>
               </div>
-            </button>
+            </Link>
 
             {/* Navigation - desktop */}
             <nav className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <button
-                  key={link.page}
-                  onClick={() => setCurrentPage(link.page)}
+                <Link
+                  key={link.href}
+                  href={link.href}
                   className="px-4 py-2 font-semibold text-sm rounded transition-colors hover:text-white"
                   style={{ color: '#8b1a1a' }}
                   onMouseEnter={(e) => {
@@ -100,14 +104,14 @@ export function Header() {
                   }}
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
             </nav>
 
             {/* Giỏ hàng + Mobile menu */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => setCurrentPage('cart')}
+              <Link
+                href="/cart"
                 className="relative p-2 rounded-lg transition-colors hover:bg-gray-100"
               >
                 <ShoppingCart className="w-6 h-6" style={{ color: '#8b1a1a' }} />
@@ -119,7 +123,7 @@ export function Header() {
                     {cartItems.length}
                   </span>
                 )}
-              </button>
+              </Link>
 
               <button
                 className="md:hidden p-2 rounded-lg hover:bg-gray-100"
@@ -135,17 +139,15 @@ export function Header() {
           {mobileOpen && (
             <div className="md:hidden border-t py-3 space-y-1" style={{ borderColor: '#e8d5b0' }}>
               {navLinks.map((link) => (
-                <button
-                  key={link.page}
-                  onClick={() => {
-                    setCurrentPage(link.page)
-                    setMobileOpen(false)
-                  }}
-                  className="w-full text-left px-4 py-3 font-semibold text-sm rounded transition-colors"
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="w-full text-left px-4 py-3 font-semibold text-sm rounded transition-colors block"
                   style={{ color: '#8b1a1a' }}
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
             </div>
           )}
