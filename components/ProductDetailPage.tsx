@@ -7,7 +7,8 @@ import { ArrowLeft, CircleCheck as CheckCircle, ShoppingCart, Star, Zap } from '
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { X, ChevronLeft as GalleryLeft, ChevronRight as GalleryRight } from 'lucide-react'
 
 interface ProductDetailPageProps {
   product: Product
@@ -18,6 +19,46 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
   const router = useRouter()
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<'description' | 'specs'>('description')
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [isZoomed, setIsZoomed] = useState(false)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null)
+  const touchWrapRef = useRef<HTMLDivElement>(null)
+
+  const imageList = product.images?.length ?? 0
+    ? product.images!
+    : [product.image].filter(Boolean)
+
+  const goNext = () => setSelectedImage((p) => (p + 1) % imageList.length)
+  const goPrev = () => setSelectedImage((p) => (p - 1 + imageList.length) % imageList.length)
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!isZoomed) return
+      if (e.key === 'ArrowRight') goNext()
+      if (e.key === 'ArrowLeft') goPrev()
+      if (e.key === 'Escape') setIsZoomed(false)
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [isZoomed, imageList.length])
+
+  // Reset selected image when navigating between products
+  useEffect(() => {
+    setSelectedImage(0)
+  }, [product.id])
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX)
+  }
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX == null || imageList.length <= 1) return
+    const diff = touchStartX - e.touches[0].clientX
+    if (Math.abs(diff) > 60) {
+      if (diff > 0) goNext()
+      else goPrev()
+      setTouchStartX(null)
+    }
+  }
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -40,25 +81,135 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Hình ảnh */}
-          <div>
+          {/* Hình ảnh gallery */}
+          <div ref={touchWrapRef} onTouchStart={onTouchStart} onTouchMove={onTouchMove}>
             <div
               className="relative w-full aspect-square rounded-2xl overflow-hidden"
-              style={{ backgroundColor: '#fdf3e3' }}
+              style={{ backgroundColor: '#fdf3e3', cursor: imageList.length > 1 ? 'pointer' : 'default' }}
+              onClick={() => setIsZoomed(true)}
             >
+              {imageList.length > 1 && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); goPrev() }}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 hover:bg-white p-2 shadow transition"
+                >
+                  <GalleryLeft className="w-5 h-5" style={{ color: '#1a0a00' }} />
+                </button>
+              )}
               <Image
-                src={product.image}
+                src={imageList[selectedImage]}
                 alt={product.name}
                 fill
                 className="object-cover"
               />
+              {imageList.length > 1 && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); goNext() }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 hover:bg-white p-2 shadow transition"
+                >
+                  <GalleryRight className="w-5 h-5" style={{ color: '#1a0a00' }} />
+                </button>
+              )}
               <div
                 className="absolute top-4 left-4 px-4 py-1.5 rounded-full font-sans font-bold text-sm text-white"
                 style={{ backgroundColor: '#c8922a' }}
               >
                 {product.category}
               </div>
+              {imageList.length > 1 && (
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {imageList.map((_, i) => (
+                    <span
+                      key={i}
+                      className="block rounded-full transition-all"
+                      style={{
+                        width: i === selectedImage ? '20px' : '8px',
+                        height: '8px',
+                        backgroundColor: i === selectedImage ? '#c8922a' : 'rgba(255,255,255,0.7)',
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
+
+            {imageList.length > 1 && (
+              <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+                {imageList.map((url, i) => (
+                  <button
+                    key={`${url}-${i}`}
+                    type="button"
+                    onClick={() => setSelectedImage(i)}
+                    className="relative flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all hover:brightness-95"
+                    style={{
+                      width: '72px',
+                      height: '72px',
+                      borderColor: i === selectedImage ? '#c8922a' : '#e8d5b0',
+                      opacity: i === selectedImage ? 1 : 0.7,
+                    }}
+                  >
+                    <Image src={url} alt={`${product.name} ${i + 1}`} fill className="object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Zoom modal */}
+            {isZoomed && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center"
+                style={{ backgroundColor: 'rgba(0,0,0,0.85)' }}
+                onClick={() => setIsZoomed(false)}
+              >
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); goPrev() }}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 hover:bg-white p-2.5 shadow transition"
+                >
+                  <GalleryLeft className="w-6 h-6" style={{ color: '#1a0a00' }} />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); goNext() }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 hover:bg-white p-2.5 shadow transition"
+                >
+                  <GalleryRight className="w-6 h-6" style={{ color: '#1a0a00' }} />
+                </button>
+                <div className="relative w-[90vw] h-[80vh]" onClick={(e) => e.stopPropagation()}>
+                  <Image
+                    src={imageList[selectedImage]}
+                    alt={product.name}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsZoomed(false)}
+                  className="absolute top-4 right-4 rounded-full bg-white/80 hover:bg-white p-2 shadow transition"
+                >
+                  <X className="w-6 h-6" style={{ color: '#1a0a00' }} />
+                </button>
+                {imageList.length > 1 && (
+                  <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    {imageList.map((_, i) => (
+                      <span
+                        key={i}
+                        className="block rounded-full transition-all"
+                        style={{
+                          width: i === selectedImage ? '24px' : '8px',
+                          height: '8px',
+                          backgroundColor: i === selectedImage ? '#c8922a' : 'rgba(255,255,255,0.5)',
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Thông tin sản phẩm */}

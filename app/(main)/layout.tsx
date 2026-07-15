@@ -1,7 +1,7 @@
 import { AppProvider } from '@/app/context'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { FloatingContacts } from '@/components/FloatingContacts'
-import { Header } from '@/components/Header'
 
 export default function MainLayout({
   children,

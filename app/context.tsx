@@ -7,6 +7,7 @@ export interface Product {
   id: string
   name: string
   image: string
+  images?: string[]
   description: string
   price: number
   category: string
@@ -67,14 +68,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCartItems(prev => prev.filter(item => item.product.id !== productId))
   }
 
-  const updateCartQuantity = (id: string, quantity: number) => {
+  const updateCartQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(id)
+      removeFromCart(productId)
       return
     }
     setCartItems(prev =>
       prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
+        item.product.id === productId ? { ...item, quantity } : item
       )
     )
   }
@@ -109,9 +110,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
   )
 }
 
+const noop = () => {}
+const SSR_FALLBACK: AppContextType = {
+  selectedProduct: null,
+  setSelectedProduct: noop,
+  cartItems: [],
+  addToCart: noop,
+  removeFromCart: noop,
+  updateCartQuantity: noop,
+  clearCart: noop,
+  categoryFilter: '',
+  setCategoryFilter: noop,
+  sortBy: 'price-low',
+  setSortBy: noop,
+}
+
 export function useAppContext() {
   const context = useContext(AppContext)
   if (!context) {
+    // During SSR/prerender, return a safe fallback to avoid build errors
+    if (typeof window === 'undefined') {
+      return SSR_FALLBACK
+    }
     throw new Error('useAppContext must be used within an AppProvider')
   }
   return context

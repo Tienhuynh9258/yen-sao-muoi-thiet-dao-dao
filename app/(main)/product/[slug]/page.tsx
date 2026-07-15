@@ -1,4 +1,4 @@
-import { findProductBySlug, products } from '@/lib/products'
+import { getProductBySlug } from '@/lib/products'
 import { ProductDetailPage } from '@/components/ProductDetailPage'
 
 interface ProductDetailProps {
@@ -7,7 +7,7 @@ interface ProductDetailProps {
 
 export default async function ProductDetail({ params }: ProductDetailProps) {
   const { slug } = await params
-  const product = findProductBySlug(slug)
+  const product = await getProductBySlug(slug)
 
   if (!product) {
     return (
@@ -18,16 +18,4 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
   }
 
   return <ProductDetailPage product={product} />
-}
-
-export async function generateStaticParams() {
-  return products.map((p) => ({
-    slug: p.name
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, ''),
-  }))
 }

@@ -1,14 +1,17 @@
 'use client'
 
-import { useAppContext } from '@/app/context'
-import { products } from '@/lib/products'
+import type { Product } from '@/app/context'
 import { ArrowRight, Award, Leaf, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { ProductCard } from './ProductCard'
 
-export function HomePage() {
+interface HomePageProps {
+  products: Product[]
+}
+
+export function HomePage({ products }: HomePageProps) {
   const { ref: valueRef, isVisible: valueVisible } = useIntersectionObserver()
   const { ref: productsRef, isVisible: productsVisible } = useIntersectionObserver()
   const { ref: categoryRef, isVisible: categoryVisible } = useIntersectionObserver()
@@ -126,7 +129,7 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
+            {featuredProducts.map((product: Product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
