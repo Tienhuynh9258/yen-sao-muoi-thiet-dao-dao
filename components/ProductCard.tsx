@@ -32,7 +32,7 @@ export function ProductCard({ product }: ProductCardProps) {
         style={{ backgroundColor: '#fdf3e3' }}
       >
         <Image
-          src={product.image}
+          src={product.images?.[0] || product.image}
           alt={product.name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-300"

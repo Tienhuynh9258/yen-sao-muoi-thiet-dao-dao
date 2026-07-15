@@ -72,6 +72,7 @@ function rowToProduct(row: Record<string, unknown>): Product {
     category: String(row.category ?? ''),
     rating: Number(row.rating ?? 0),
     reviews: Number(row.reviews ?? 0),
+    images: Array.isArray(row.images) ? row.images.map(String) : [],
     specs: Array.isArray(row.specs) ? row.specs.map(String) : [],
   }
 }

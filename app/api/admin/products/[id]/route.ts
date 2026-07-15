@@ -77,10 +77,44 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   if (!admin) {
     return Response.json({ error: 'Database not configured' }, { status: 500 })
   }
+
+  // Fetch product to clean up storage images before deleting row
+  const { data: product, error: fetchError } = await admin
+    .from('products')
+    .select('image,images')
+    .eq('id', id)
+    .single()
+
+  // Delete the DB row
   const { error } = await admin.from('products').delete().eq('id', id)
 
   if (error) {
     return Response.json({ error: error.message }, { status: 500 })
+  }
+
+  // Best-effort remove from storage all images hosted in our Supabase bucket
+  const bucket = 'product-images'
+  const publicUrlBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${bucket}/`
+  const allImageUrls: string[] = []
+  if (product?.image) allImageUrls.push(product.image)
+  if (Array.isArray(product?.images)) {
+    for (const url of product.images) {
+      if (typeof url === 'string') allImageUrls.push(url)
+    }
+  }
+  const uniquePaths = Array.from(
+    new Set(
+      allImageUrls
+        .filter((u) => u.startsWith(publicUrlBase))
+        .map((u) => u.replace(publicUrlBase, ''))
+    )
+  )
+  if (uniquePaths.length > 0) {
+    try {
+      await admin.storage.from(bucket).remove(uniquePaths)
+    } catch {
+      // ignore storage cleanup failures
+    }
   }
 
   revalidatePath('/')

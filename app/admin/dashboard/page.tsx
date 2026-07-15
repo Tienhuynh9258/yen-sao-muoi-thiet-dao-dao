@@ -10,6 +10,8 @@ interface Product {
   name: string
   category: string
   price: number
+  image: string
+  images?: string[]
   created_at: string
 }
 
@@ -103,6 +105,7 @@ export default function AdminDashboardPage() {
               <thead>
                 <tr style={{ backgroundColor: '#fdf3e3' }}>
                   <th className="text-left px-4 py-3 font-semibold" style={{ color: '#1a0a00' }}>Tên</th>
+                  <th className="text-left px-4 py-3 font-semibold" style={{ color: '#1a0a00', width: '80px' }}>Ảnh</th>
                   <th className="text-left px-4 py-3 font-semibold" style={{ color: '#1a0a00' }}>Danh mục</th>
                   <th className="text-right px-4 py-3 font-semibold" style={{ color: '#1a0a00' }}>Giá</th>
                   <th className="text-right px-4 py-3 font-semibold" style={{ color: '#1a0a00' }}>Hành động</th>
@@ -116,6 +119,13 @@ export default function AdminDashboardPage() {
                     style={{ borderColor: '#e8d5b0' }}
                   >
                     <td className="px-4 py-3" style={{ color: '#1a0a00' }}>{product.name}</td>
+                    <td className="px-4 py-3">
+                      {product.images?.[0] || product.image ? (
+                        <img src={product.images?.[0] || product.image} alt={product.name} className="h-10 w-10 rounded object-cover border" style={{ borderColor: '#e8d5b0' }} />
+                      ) : (
+                        <span className="text-xs" style={{ color: '#8a6a40' }}>—</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3" style={{ color: '#8a6a40' }}>{product.category}</td>
                     <td className="px-4 py-3 text-right font-semibold" style={{ color: '#c8922a' }}>
                       {formatPrice(product.price)}
@@ -140,7 +150,7 @@ export default function AdminDashboardPage() {
                 ))}
                 {products.length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-4 py-8 text-center" style={{ color: '#8a6a40' }}>
+                    <td colSpan={5} className="px-4 py-8 text-center" style={{ color: '#8a6a40' }}>
                       Chưa có sản phẩm nào
                     </td>
                   </tr>

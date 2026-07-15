@@ -122,7 +122,7 @@ export function CartPage() {
               >
                 <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0" style={{ backgroundColor: '#fdf3e3' }}>
                   <Image
-                    src={item.product.image}
+                    src={item.product.images?.[0] || item.product.image}
                     alt={item.product.name}
                     fill
                     className="object-cover"
