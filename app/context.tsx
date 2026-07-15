@@ -67,14 +67,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCartItems(prev => prev.filter(item => item.product.id !== productId))
   }
 
-  const updateCartQuantity = (id: string, quantity: number) => {
+  const updateCartQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) {
-      removeFromCart(id)
+      removeFromCart(productId)
       return
     }
     setCartItems(prev =>
       prev.map(item =>
-        item.id === id ? { ...item, quantity } : item
+        item.product.id === productId ? { ...item, quantity } : item
       )
     )
   }
