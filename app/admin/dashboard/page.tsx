@@ -67,15 +67,15 @@ export default function AdminDashboardPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/product"
-              className="font-sans text-sm font-semibold hover:underline"
-              style={{ color: '#c8922a' }}
+              className="inline-flex items-center px-4 py-2 rounded-lg font-sans font-semibold text-sm text-white transition-all hover:opacity-90 shadow-sm"
+              style={{ backgroundColor: '#c8922a' }}
             >
               Xem Website
             </Link>
             <button
               onClick={handleLogout}
-              className="font-sans text-sm font-semibold hover:underline"
-              style={{ color: '#8b1a1a' }}
+              className="inline-flex items-center px-4 py-2 rounded-lg font-sans font-semibold text-sm text-white transition-all hover:opacity-90 shadow-sm"
+              style={{ backgroundColor: '#8b1a1a' }}
             >
               Đăng Xuất
             </button>
@@ -133,15 +133,15 @@ export default function AdminDashboardPage() {
                     <td className="px-4 py-3 text-right">
                       <Link
                         href={`/admin/dashboard/edit/${product.id}`}
-                        className="inline-block mr-3 font-semibold hover:underline"
-                        style={{ color: '#c8922a' }}
+                        className="inline-flex items-center px-3 py-1.5 rounded-md font-sans font-semibold text-xs text-white transition-all hover:opacity-90 shadow-sm mr-2"
+                        style={{ backgroundColor: '#c8922a' }}
                       >
                         Sửa
                       </Link>
                       <button
                         onClick={() => handleDelete(product.id)}
-                        className="font-semibold hover:underline"
-                        style={{ color: '#8b1a1a' }}
+                        className="inline-flex items-center px-3 py-1.5 rounded-md font-sans font-semibold text-xs text-white transition-all hover:opacity-90 shadow-sm"
+                        style={{ backgroundColor: '#8b1a1a' }}
                       >
                         Xóa
                       </button>
