@@ -66,7 +66,7 @@ export default function AdminDashboardPage() {
           </h1>
           <div className="flex items-center gap-3">
             <Link
-              href="/"
+              href="/product"
               className="font-sans text-sm font-semibold hover:underline"
               style={{ color: '#c8922a' }}
             >
