@@ -189,8 +189,8 @@ export default function EditProductPage({ params }: EditProps) {
           </h1>
           <button
             onClick={handleDelete}
-            className="font-sans font-semibold text-sm hover:underline"
-            style={{ color: '#8b1a1a' }}
+            className="inline-flex items-center px-4 py-2 rounded-lg font-sans font-semibold text-sm text-white transition-all hover:opacity-90 shadow-sm"
+            style={{ backgroundColor: '#8b1a1a' }}
           >
             Xóa Sản Phẩm
           </button>

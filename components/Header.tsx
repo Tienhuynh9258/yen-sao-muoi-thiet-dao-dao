@@ -1,14 +1,22 @@
 'use client'
 
 import { useAppContext } from '@/app/context'
-import { Menu, ShoppingCart, X } from 'lucide-react'
+import { Menu, Settings, ShoppingCart, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function Header() {
   const { cartItems } = useAppContext()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    fetch('/api/admin/check')
+      .then((res) => res.json())
+      .then((data) => setIsAdmin(data.authenticated === true))
+      .catch(() => setIsAdmin(false))
+  }, [])
 
   const navLinks = [
     { label: 'Trang chủ', href: '/' },
@@ -108,8 +116,20 @@ export function Header() {
               ))}
             </nav>
 
-            {/* Giỏ hàng + Mobile menu */}
+            {/* Giỏ hàng + Admin + Mobile menu */}
             <div className="flex items-center gap-2">
+              {isAdmin === true && (
+                <Link
+                  href="/admin/dashboard/"
+                  title="Trang quản trị"
+                  className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-colors hover:opacity-90"
+                  style={{ backgroundColor: '#8b1a1a', color: '#ffffff' }}
+                >
+                  <Settings className="w-4 h-4" />
+                  <span>Admin</span>
+                </Link>
+              )}
+
               <Link
                 href="/cart"
                 className="relative p-2 rounded-lg transition-colors hover:bg-gray-100"
@@ -149,6 +169,16 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              {isAdmin === true && (
+                <Link
+                  href="/admin/dashboard/"
+                  onClick={() => setMobileOpen(false)}
+                  className="w-full text-left px-4 py-3 font-semibold text-sm rounded transition-colors block"
+                  style={{ color: '#8b1a1a' }}
+                >
+                  Trang quản trị
+                </Link>
+              )}
             </div>
           )}
         </div>
