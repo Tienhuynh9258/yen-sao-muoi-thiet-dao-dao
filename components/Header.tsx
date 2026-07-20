@@ -154,21 +154,21 @@ export function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo - nổi trên dải trắng */}
             <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0 relative z-20">
-              <div className="relative -mb-12 logo-glow-wrap">
+              <div className="relative -mb-10 logo-glow-wrap">
                 <Image
                   src="/logo_transparent.png"
                   alt="Yến Sào Mười Thiết Đào Đào"
-                  width={96}
-                  height={96}
-                  className="h-24 w-24 object-contain custom-logo-shadow"
+                  width={56}
+                  height={56}
+                  className="h-16 w-16 object-contain custom-logo-shadow"
                   priority
                 />
               </div>
               <div className="hidden sm:block text-left">
-                <div className="font-sans font-bold text-xl leading-tight tracking-wide" style={{ color: '#8b1a1a' }}>
+                <div className="font-sans font-bold text-base leading-tight tracking-wide" style={{ color: '#8b1a1a' }}>
                   Yến Sào Mười Thiết
                 </div>
-                <div className="font-sans font-semibold text-base tracking-wider" style={{ color: '#c8922a' }}>
+                <div className="font-sans font-semibold text-xs tracking-wider" style={{ color: '#c8922a' }}>
                   Đào Đào
                 </div>
               </div>
