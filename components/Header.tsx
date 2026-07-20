@@ -1,15 +1,34 @@
 'use client'
 
 import { useAppContext } from '@/app/context'
-import { Menu, Settings, ShoppingCart, X } from 'lucide-react'
+import { formatPrice, getSlug } from '@/lib/products'
+import { Menu, Search, Settings, ShoppingCart, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+
+interface ProductPreview {
+  id: string
+  name: string
+  price: number
+  image: string
+  images?: string[]
+}
 
 export function Header() {
+  const router = useRouter()
   const { cartItems } = useAppContext()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
+
+  // Search states
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [allProducts, setAllProducts] = useState<ProductPreview[]>([])
+  const [searchResults, setSearchResults] = useState<ProductPreview[]>([])
+  const [searchLoading, setSearchLoading] = useState(false)
+  const searchRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     fetch('/api/admin/check')
@@ -17,6 +36,58 @@ export function Header() {
       .then((data) => setIsAdmin(data.authenticated === true))
       .catch(() => setIsAdmin(false))
   }, [])
+
+  // Fetch products when search opens
+  useEffect(() => {
+    if (!searchOpen) return
+    setSearchLoading(true)
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => {
+        const products = (data.products ?? []) as ProductPreview[]
+        setAllProducts(products)
+        setSearchResults(products)
+        setSearchLoading(false)
+      })
+      .catch(() => setSearchLoading(false))
+  }, [searchOpen])
+
+  // Filter when query changes
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchResults(allProducts)
+      return
+    }
+    try {
+      const re = new RegExp(searchQuery.trim(), 'i')
+      setSearchResults(allProducts.filter((p) => re.test(p.name)))
+    } catch {
+      setSearchResults(
+        allProducts.filter((p) =>
+          p.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
+        )
+      )
+    }
+  }, [searchQuery, allProducts])
+
+  // Close search on click outside
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false)
+      }
+    }
+    if (searchOpen) {
+      document.addEventListener('mousedown', handleClick)
+      return () => document.removeEventListener('mousedown', handleClick)
+    }
+  }, [searchOpen])
+
+  const handleSelectProduct = (product: ProductPreview) => {
+    setSearchOpen(false)
+    setSearchQuery('')
+    router.push(`/product/${getSlug(product.name)}`)
+  }
 
   const navLinks = [
     { label: 'Trang chủ', href: '/' },
@@ -28,7 +99,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50">
       {/* Thanh hotline đỏ */}
-      <div style={{ backgroundColor: '#8b1a1a' }} className="text-white py-2">
+      <div style={{ backgroundColor: '#8b1a1a' }} className="text-white py-1.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-6">
             <a
@@ -72,23 +143,32 @@ export function Header() {
       </div>
 
       {/* Nav chính - nền trắng */}
-      <div className="bg-white shadow-md">
+      <div
+        className="bg-white relative z-10"
+        style={{
+          borderBottom: '1px solid #e8d5b0',
+          boxShadow: '0 1px 0 rgba(139,26,26,0.06)',
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0">
-              <Image
-                src="/logo.png"
-                alt="Yến Sào Mười Thiết Đào Đào"
-                width={64}
-                height={64}
-                className="h-16 w-16 object-contain"
-              />
+          <div className="flex items-center justify-between h-16">
+            {/* Logo - nổi trên dải trắng */}
+            <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0 relative z-20">
+              <div className="relative -mb-12 logo-glow-wrap">
+                <Image
+                  src="/logo_transparent.png"
+                  alt="Yến Sào Mười Thiết Đào Đào"
+                  width={96}
+                  height={96}
+                  className="h-24 w-24 object-contain custom-logo-shadow"
+                  priority
+                />
+              </div>
               <div className="hidden sm:block text-left">
-                <div className="font-sans font-bold text-lg leading-tight" style={{ color: '#8b1a1a' }}>
+                <div className="font-sans font-bold text-xl leading-tight tracking-wide" style={{ color: '#8b1a1a' }}>
                   Yến Sào Mười Thiết
                 </div>
-                <div className="font-sans font-semibold text-sm" style={{ color: '#c8922a' }}>
+                <div className="font-sans font-semibold text-base tracking-wider" style={{ color: '#c8922a' }}>
                   Đào Đào
                 </div>
               </div>
@@ -100,41 +180,105 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 font-semibold text-sm rounded transition-colors hover:text-white"
+                  className="nav-link-underline px-4 py-2 font-semibold text-sm rounded-lg transition-all duration-200 hover:opacity-80"
                   style={{ color: '#8b1a1a' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#8b1a1a'
-                    e.currentTarget.style.color = '#ffffff'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = '#8b1a1a'
-                  }}
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            {/* Giỏ hàng + Admin + Mobile menu */}
-            <div className="flex items-center gap-2">
+            {/* Giỏ hàng + Tìm kiếm + Admin + Mobile menu */}
+            <div className="flex items-center gap-2 relative">
               {isAdmin === true && (
                 <Link
                   href="/admin/dashboard/"
                   title="Trang quản trị"
-                  className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-colors hover:opacity-90"
-                  style={{ backgroundColor: '#8b1a1a', color: '#ffffff' }}
+                  className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5 active:translate-y-0"
+                  style={{ backgroundColor: '#8b1a1a', color: '#ffffff', boxShadow: '0 2px 6px rgba(139,26,26,0.25)' }}
                 >
                   <Settings className="w-4 h-4" />
                   <span>Admin</span>
                 </Link>
               )}
 
+              {/* Tìm kiếm */}
+              <div ref={searchRef} className="relative">
+                <button
+                  onClick={() => setSearchOpen((prev) => !prev)}
+                  className="relative p-2.5 rounded-xl transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5 active:translate-y-0"
+                  style={{ backgroundColor: '#8b1a1a', boxShadow: '0 2px 6px rgba(139,26,26,0.25)' }}
+                  aria-label="Tìm kiếm"
+                >
+                  <Search className="w-5 h-5 text-white" />
+                </button>
+
+                {searchOpen && (
+                  <div
+                    className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-white rounded-xl p-3 z-50"
+                    style={{
+                      borderColor: '#e8d5b0',
+                      borderWidth: 1,
+                      boxShadow: '0 4px 20px rgba(26,10,0,0.08), 0 1px 4px rgba(200,146,42,0.12)',
+                    }}
+                  >
+                    <input
+                      autoFocus
+                      placeholder="Tìm sản phẩm..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border text-sm font-sans outline-none"
+                      style={{ borderColor: '#e8d5b0' }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Escape') setSearchOpen(false)
+                      }}
+                    />
+                    <div className="mt-2 max-h-64 overflow-y-auto space-y-1">
+                      {searchLoading ? (
+                        <p className="font-sans text-xs text-center py-2" style={{ color: '#8a6a40' }}>
+                          Đang tải...
+                        </p>
+                      ) : searchResults.length === 0 ? (
+                        <p className="font-sans text-xs text-center py-2" style={{ color: '#8a6a40' }}>
+                          Không tìm thấy sản phẩm
+                        </p>
+                      ) : (
+                        searchResults.map((product) => (
+                          <button
+                            key={product.id}
+                            onClick={() => handleSelectProduct(product)}
+                            className="w-full flex items-center gap-3 px-2 py-2 rounded-lg text-left hover:bg-gray-50 transition-colors"
+                          >
+                            <img
+                              src={product.images?.[0] || product.image}
+                              alt={product.name}
+                              className="h-10 w-10 rounded object-cover border flex-shrink-0"
+                              style={{ borderColor: '#e8d5b0' }}
+                            />
+                            <div className="min-w-0 flex-1">
+                              <p className="font-sans text-sm font-semibold truncate" style={{ color: '#1a0a00' }}>
+                                {product.name}
+                              </p>
+                              <p className="font-sans text-xs font-semibold" style={{ color: '#c8922a' }}>
+                                {formatPrice(product.price)}
+                              </p>
+                            </div>
+                          </button>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Giỏ hàng */}
               <Link
                 href="/cart"
-                className="relative p-2 rounded-lg transition-colors hover:bg-gray-100"
+                className="relative p-2.5 rounded-xl transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5 active:translate-y-0"
+                style={{ backgroundColor: '#8b1a1a', boxShadow: '0 2px 6px rgba(139,26,26,0.25)' }}
+                aria-label="Giỏ hàng"
               >
-                <ShoppingCart className="w-6 h-6" style={{ color: '#8b1a1a' }} />
+                <ShoppingCart className="w-5 h-5 text-white" />
                 {cartItems.length > 0 && (
                   <span
                     className="absolute -top-1 -right-1 w-5 h-5 text-white text-xs font-bold rounded-full flex items-center justify-center"
