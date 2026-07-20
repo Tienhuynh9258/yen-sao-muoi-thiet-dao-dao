@@ -151,7 +151,7 @@ export function Header() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-[72px]">
             {/* Logo - nổi trên dải trắng */}
             <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0 relative z-20">
               <div className="relative -mb-14 logo-glow-wrap">
