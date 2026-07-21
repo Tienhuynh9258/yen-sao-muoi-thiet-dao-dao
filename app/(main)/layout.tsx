@@ -2,6 +2,7 @@ import { AppProvider } from '@/app/context'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { FloatingContacts } from '@/components/FloatingContacts'
+import { Toast } from '@/components/Toast'
 
 export default function MainLayout({
   children,
@@ -15,6 +16,7 @@ export default function MainLayout({
         <div className="flex-1">{children}</div>
         <Footer />
         <FloatingContacts />
+        <Toast />
       </div>
     </AppProvider>
   )

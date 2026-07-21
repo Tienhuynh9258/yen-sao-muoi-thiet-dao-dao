@@ -132,3 +132,43 @@
     animation: none;
   }
 }
+
+/* ── Header polish ───────────────────────────── */
+.custom-logo-shadow {
+  filter: drop-shadow(0 2px 3px rgba(139,26,26,0.25))
+          drop-shadow(0 6px 12px rgba(200,146,42,0.18));
+}
+
+.nav-link-underline {
+  position: relative;
+}
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 0;
+  height: 2px;
+  background: #c8922a;
+  border-radius: 1px;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+.nav-link-underline:hover::after {
+  width: 70%;
+  left: 15%;
+}
+
+.logo-glow-wrap::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,213,176,0.60) 0%, rgba(232,213,176,0) 70%);
+  transform: translate(-50%, -30%);
+  filter: blur(4px);
+  z-index: -1;
+  pointer-events: none;
+}
