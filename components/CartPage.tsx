@@ -99,7 +99,7 @@ export function CartPage() {
 
   return (
     <main style={{ backgroundColor: '#fdf8f3' }} className="min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pt-12">
         <Link
           href="/product"
           className="inline-flex items-center gap-2 font-sans font-semibold mb-6 transition-colors hover:underline"

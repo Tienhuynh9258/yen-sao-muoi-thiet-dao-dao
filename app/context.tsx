@@ -30,10 +30,15 @@ interface AppContextType {
   removeFromCart: (productId: string) => void
   updateCartQuantity: (id: string, quantity: number) => void
   clearCart: () => void
-  categoryFilter: string
-  setCategoryFilter: (category: string) => void
+  categoryFilters: string[]
+  toggleCategoryFilter: (category: string) => void
+  setCategoryFilters: (categories: string[]) => void
   sortBy: 'price-low' | 'price-high' | 'rating'
   setSortBy: (sort: 'price-low' | 'price-high' | 'rating') => void
+  priceRange: [number, number]
+  setPriceRange: (range: [number, number]) => void
+  toast: { message: string; visible: boolean } | null
+  showToast: (message: string) => void
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -49,8 +54,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     return []
   })
-  const [categoryFilter, setCategoryFilter] = useState('')
+  const [categoryFilters, setCategoryFilters] = useState<string[]>([])
   const [sortBy, setSortBy] = useState<'price-low' | 'price-high' | 'rating'>('price-low')
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5_000_000])
+  const [toast, setToast] = useState<{ message: string; visible: boolean } | null>(null)
+
+  const showToast = (message: string) => {
+    setToast({ message, visible: true })
+    setTimeout(() => {
+      setToast((prev) => (prev ? { ...prev, visible: false } : null))
+      setTimeout(() => setToast(null), 300)
+    }, 2500)
+  }
+
+  const toggleCategoryFilter = (category: string) => {
+    setCategoryFilters((prev) =>
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+    )
+  }
 
   const addToCart = (product: Product) => {
     setCartItems(prev => {
@@ -62,6 +83,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { id: crypto.randomUUID(), product, quantity: 1 }]
     })
+    showToast(`Đã thêm "${product.name}" vào giỏ hàng`)
   }
 
   const removeFromCart = (productId: string) => {
@@ -99,10 +121,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
         removeFromCart,
         updateCartQuantity,
         clearCart,
-        categoryFilter,
-        setCategoryFilter,
+        categoryFilters,
+        toggleCategoryFilter,
+        setCategoryFilters,
         sortBy,
         setSortBy,
+        priceRange,
+        setPriceRange,
+        toast,
+        showToast,
       }}
     >
       {children}
@@ -119,10 +146,15 @@ const SSR_FALLBACK: AppContextType = {
   removeFromCart: noop,
   updateCartQuantity: noop,
   clearCart: noop,
-  categoryFilter: '',
-  setCategoryFilter: noop,
+  categoryFilters: [],
+  toggleCategoryFilter: noop,
+  setCategoryFilters: noop,
   sortBy: 'price-low',
   setSortBy: noop,
+  priceRange: [0, 5_000_000],
+  setPriceRange: noop,
+  toast: null,
+  showToast: noop,
 }
 
 export function useAppContext() {
